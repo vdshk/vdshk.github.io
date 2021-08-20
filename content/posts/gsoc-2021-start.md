@@ -1,5 +1,5 @@
 ---
-title: "GSoC 2021"
+title: "GSoC 2021 Start"
 date: 2021-07-16T18:30:54+03:00
 draft: false
 toc: false
@@ -7,6 +7,8 @@ images:
 tags:
   - gsoc
   - networkx
+series:
+  - GSoC-2021
 ---
 
 {{< image
@@ -29,7 +31,7 @@ The goal of this project is to create Jupyter notebooks that will become detaile
 containing the ideas behind, explanations and experimental analysis of the algorithms
 implemented in NetworkX.
 
-Let me tell you a about how I got there.
+Let me tell you about how I got there.
 
 ## 👨‍💻 Google Summer of Code
 
