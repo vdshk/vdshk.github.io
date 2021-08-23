@@ -43,13 +43,13 @@ You can read about it in details
 
 The main result of my work is the
 [topological sort tutorial](https://networkx.org/nx-guides/content/algorithms/dag/index.html#).
-* Corresponding **merged PR:**
+* ✅ Corresponding **merged PR:**
 [[GSoC contribution] Topological sort notebook](https://github.com/networkx/nx-guides/pull/44).
 
 Furthermore, during the work on DAGs module of NetworkX, I opened several PRs with improvements:
-* **Open PR** to improve code base:
+* ✅ **Merged PR** to improve code base:
 [[GSoC contribution] Improving functions descendants and ancestors in dag.py](https://github.com/networkx/networkx/pull/5017)
-* **Open PR** to improve documentation:
+* ✅ **Merged PR** to improve documentation:
 [[GSoC contribution] Adding examples to docstrings in dag.py](https://github.com/networkx/networkx/pull/5019)
 
 # 🥳 Conclusion
