@@ -112,7 +112,7 @@ author = true
 
 topText = []
 bottomText = [
-    "Powered by <a href=\"http://gohugo.io\">Hugo</a>"
+    "Powered by <a href=\"https://gohugo.io\">Hugo</a>"
 ]
 
 # Colors for favicons
