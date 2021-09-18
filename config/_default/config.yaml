@@ -4,8 +4,20 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Academic # Website name
-baseurl: 'https://example.com/' # Website URL
-copyright: '' # Footer text, e.g. '© {year} Me'
+baseurl: 'https://vdshk.me/' # Website URL
+
+############################
+## COPYRIGHT
+############################
+
+copyright: '© {2021-present} Vadim Abzalov' # Footer text, e.g. '© {year} Me'
+copyright_license:
+  enable: true
+  allow_derivatives: false
+  share_alike: false
+  allow_commercial: false
+  notice: >-
+    Except as otherwise noted, this work is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
 ############################
 ## LANGUAGE
