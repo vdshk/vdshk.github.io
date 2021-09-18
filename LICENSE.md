@@ -1,5 +1,30 @@
-MIT License
+# Articles
 
+All the files inside `content` directory are licensed under
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+The attribution requirement is only met when:
+
+1. The canonical link is directed towards the original article.
+2. The following message is displayed above and below the article:
+   `This article has been originally published on <a href="https://vdshk.github.io/">Vadim Abzalov's blog</a>.`.
+
+# Images
+
+All the files inside `assets/media` directory are copyrighted to Vadim Abzalov.
+All rights reserved.
+
+# Logos
+
+All of the used logos are copyrighted to their respective companies.
+
+# Other files
+
+Files not mentioned in previous paragraphs are licensed under the MIT License.
+
+# APACHE LICENSE, VERSION 2.0
+```text
+Copyright (c) 2021-present Vadim Abzalov
 Copyright (c) 2016-present George Cushen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,3 +44,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
