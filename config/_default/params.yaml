@@ -20,7 +20,7 @@ twitter: 'https://twitter.com/__vdshk'
 
 # Contact (edit or remove options as required)
 
-#email: test@example.org
+#email: vadim.i.abzalov@gmail.com
 #phone: 888 888 88 88
 #address:
 #  street: 450 Serra Mall
@@ -37,11 +37,19 @@ twitter: 'https://twitter.com/__vdshk'
 #  - 'Monday 10:00 to 13:00'
 #  - 'Wednesday 09:00 to 10:00'
 #appointment_url: 'https://calendly.com'
-#contact_links:
-#  - icon: twitter
-#    icon_pack: fab
-#    name: DM Me
-#    link: 'https://twitter.com/Twitter'
+contact_links:
+  - icon: twitter
+    icon_pack: fab
+    name: Tweet me
+    link: https://twitter.com/__vdshk
+  - icon: vk
+    icon_pack: fab
+    name: DM me
+    link: https://vk.com/vdshk
+  - icon: telegram
+    icon_pack: fab
+    name: Send me a message
+    link: https://t.me/vdshk42
 #  - icon: skype
 #    icon_pack: fab
 #    name: Skype Me
