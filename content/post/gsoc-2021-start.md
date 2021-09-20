@@ -3,7 +3,7 @@
 
 title: "GSoC 2021 Start"
 subtitle: ""
-summary: ""
+summary: "A post about Google Summer of Code 2021 and tips on how to get there"
 authors: []
 tags: [ "GSoC", "NetworkX", "Graph theory" ]
 categories: []
@@ -32,7 +32,7 @@ projects: []
 I am happy to have been accepted to
 [Google Summer of Code 2021](https://summerofcode.withgoogle.com/)
 with the project
-"*Pedagogical Interactive Notebooks for Algorithms Implemented in [NetworkX](https://networkx.org/)*".
+**"Pedagogical Interactive Notebooks for Algorithms Implemented in [NetworkX](https://networkx.org/)"**.
 I will be writing code under the mentorship of
 [Eric Ma](https://github.com/ericmjl)
 and
@@ -62,26 +62,26 @@ so I have written down the estimated dates for the stages that are important for
 
 - ✅ **Organizations Announced**
 
-  📅 <u> early March </u>
+  📅 early March
 
   📝 Students can begin discussing project ideas with open source organizations
   that accepted to participate as a mentor organization.
 
 - ✅ **Student Application Period**
 
-  📅 <u> end of March — mid-April </u>
+  📅 end of March — mid-April
 
   📝 Students can register and submit their proposals to mentor organizations.
 
 - ✅ **Application Review Period**
 
-  📅 <u> mid-April — mid-May </u>
+  📅 mid-April — mid-May
 
   📝 Mentor organizations review and select student proposals.
 
 - ✅ **Student Projects Announced**
 
-  📅 <u> at the end of the review period </u>
+  📅 at the end of the review period
 
   📝 Accepted students are paired with a mentor and start planning their projects and milestones.
 
@@ -93,37 +93,37 @@ For those lucky ones, who were accepted, there are a few more important stages.
 
 - ✅ **Community Bonding**
 
-  📅 <u> from the moment student projects announced — early June </u>
+  📅 from the moment student projects announced — early June
 
   📝 Students spend a month learning more about their organization's community.
 
 - ✅ **Coding, part 1**
 
-  📅 <u> early June — mid-July </u>
+  📅 early June — mid-July
 
   📝 Students work on their Google Summer of Code projects.
 
 - ✅ **First Evaluations**
 
-  📅 <u> mid-July </u>
+  📅 mid-July
 
   📝 Mentors and students submit their evaluations of one another.
 
 - ✅ **Coding, part 2**
 
-  📅 <u> mid-July — mid-August </u>
+  📅 mid-July — mid-August
 
   📝 Students work on their Google Summer of Code projects.
 
 - ✅ **Final Evaluations**
 
-  📅 <u> mid-August </u>
+  📅 mid-August
 
   📝 Students submit their code, project summaries, and final evaluations of their mentors.
 
 - ✅ **Results Announced**
 
-  📅 <u> end of August </u>
+  📅 end of August
 
   📝 Students are notified of the pass/fail status of their Google Summer of Code projects.
 

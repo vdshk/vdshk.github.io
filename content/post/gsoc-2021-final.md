@@ -3,7 +3,7 @@
 
 title: "GSoC 2021 Final"
 subtitle: ""
-summary: "This is a short post about what I did during the GSoC"
+summary: "A post about what I did during the Google Summer of Code 2021"
 authors: []
 tags: [ "GSoC", "NetworkX", "Graph theory" ]
 categories: []
