@@ -5,7 +5,7 @@ title: "GSoC 2021 Start"
 subtitle: ""
 summary: ""
 authors: []
-tags: [ "gsoc", "networkx" ]
+tags: [ "GSoC", "NetworkX", "Graph theory" ]
 categories: []
 date: 2021-07-16T18:30:54+03:00
 lastmod: 2021-09-18T18:58:21+03:00

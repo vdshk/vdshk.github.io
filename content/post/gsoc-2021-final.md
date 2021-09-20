@@ -5,7 +5,7 @@ title: "GSoC 2021 Final"
 subtitle: ""
 summary: "This is a short post about what I did during the GSoC"
 authors: []
-tags: [ "gsoc", "networkx" ]
+tags: [ "GSoC", "NetworkX", "Graph theory" ]
 categories: []
 date: 2021-08-20T13:43:56+03:00
 lastmod: 2021-09-18T19:09:55+03:00
