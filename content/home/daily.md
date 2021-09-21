@@ -7,14 +7,14 @@ widget: pages
 headless: true
 
 # Order that this section appears on the page.
-weight: 30
+weight: 20
 
-title: Posts
+title: Daily
 subtitle:
 
 content:
   # Page type to display. E.g. post, talk, publication...
-  page_type: post
+  page_type: daily
   # Choose how many pages you would like to display (0 = all pages)
   count: 5
   # Filter on criteria
