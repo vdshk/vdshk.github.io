@@ -12,7 +12,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 999
 
-title: ✉ Contact
+title: 📨 Contact
 subtitle:
 
 content:
