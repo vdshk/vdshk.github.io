@@ -28,17 +28,12 @@ image:
 projects: []
 ---
 
-It's funny, but I could not find a simple guide on how to install Hugo Extended on Ubuntu 20.04 😅
-
-I'll try to fix this annoying gap 😊
-
 All you need to install Hugo Extended is to download the corresponding `.deb` file from the hugo repository
 (can be found here 👉 [link](https://github.com/gohugoio/hugo/releases)).
 
-For now, the corresponding release is `hugo_extended_0.88.1_Linux-64bit.deb`:
+For now (September 2021), the corresponding release is `hugo_extended_0.88.1_Linux-64bit.deb`:
 
 ```shell
-cd ~/Downloads
 wget https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb
 ```
 
