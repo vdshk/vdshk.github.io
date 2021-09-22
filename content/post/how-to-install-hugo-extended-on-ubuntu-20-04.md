@@ -5,7 +5,7 @@ title: "How to Install Hugo Extended on Ubuntu 20.04"
 subtitle: ""
 summary: "One easy step to install hugo extended"
 authors: []
-tags: []
+tags: [ "Hugo", "Hugo Extended", "Ubuntu 20.04", "How to Install" ]
 categories: []
 date: 2021-09-22T20:01:48+03:00
 lastmod: 2021-09-22T20:01:48+03:00
