@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Vadim Abzalov
+title: Вадим Абзалов
 
 # Is this the primary user of the site?
 superuser: true
@@ -10,27 +10,27 @@ superuser: true
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: Saint Petersburg State University
-  url: https://english.spbu.ru/
+- name: Санкт-Петербургский государственный университет
+  url: https://spbu.ru/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include artificial intelligence, graph theory, algorithms and data structures.
+bio: Программная инженерия и всё вокруг
 
 # Interests to show in About widget
 interests:
-- Artificial Intelligence
-- Graph theory
-- Algorithms and data structures
+- Машинное Обучения
+- Теория Графов
+- Алгоритмы и Структуры Данных
 
 # Education to show in About widget
 education:
   courses:
   - course: Software Engineering
     institution: Computer Science Center
-    year: 2020-present
-  - course: BSc in Software Engineering
-    institution: Saint Petersburg State University
-    year: 2018-present
+    year: 2020 - настоящее время
+  - course: Программная инженерия
+    institution: Санкт-Петербургский государственный университет
+    year: 2018 - настоящее время
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
