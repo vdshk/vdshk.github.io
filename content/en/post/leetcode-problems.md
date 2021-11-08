@@ -30,10 +30,10 @@ projects: []
 
 ## 🚀 List of medium and hard problems from LeetCode up to `#1965`, sorted by `Score` in ascending order
 
-> 🙏 Thanks [@i_am_the_senate](https://leetcode.com/i_am_the_senate/) for his awesome post ["1000 LeetCode Problems within a Year"](https://leetcode.com/discuss/general-discussion/522705/1000-leetcode-problems-within-a-year)
+> 🙏 Thanks [@i_am_the_senate](https://leetcode.com/i_am_the_senate/) for the awesome post ["1000 LeetCode Problems within a Year"](https://leetcode.com/discuss/general-discussion/522705/1000-leetcode-problems-within-a-year)
 
 | My solution | #    | Title                                                                                                                                                                                        | Acc.   | Diff.  | Score |
-|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|-------|
+|--------|-----:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------:|--------|------:|
 |        | 535  | [Encode and Decode TinyURL](https://leetcode.com/problems/encode-and-decode-tinyurl)                                                                                                         | 82.90% | Medium | 0.846 |
 |        | 807  | [Max Increase to Keep City Skyline](https://leetcode.com/problems/max-increase-to-keep-city-skyline)                                                                                         | 84.90% | Medium | 0.913 |
 |        | 654  | [Maximum Binary Tree](https://leetcode.com/problems/maximum-binary-tree)                                                                                                                     | 82.30% | Medium | 0.925 |
