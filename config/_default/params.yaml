@@ -102,6 +102,8 @@ highlight: true
 highlight_languages:
   - r
   - python
+  - cpp
+  - javascript
 math: true
 diagram: true
 privacy_pack: false
