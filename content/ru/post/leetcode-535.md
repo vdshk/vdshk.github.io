@@ -1,11 +1,11 @@
 ---
 # Documentation: https://wowchemy.com/docs/managing-content/
 
-title: "Leetcode 535"
+title: "LeetCode 535"
 subtitle: ""
 summary: "Encode and Decode TinyURL"
 authors: []
-tags: []
+tags: [ "LeetCode", "Algorithms and data structures", "Hash Table", "Hash Function", "String" ]
 categories: []
 date: 2021-11-08T09:47:24+03:00
 lastmod: 2021-11-08T09:47:24+03:00
