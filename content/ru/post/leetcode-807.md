@@ -81,15 +81,16 @@ Output: 0
 ## Решение
 
 - Пусть новые высоты зданий это $grid'$
-- Мы хотим максимизировать $\underset{i, j}{\sum}\\{grid'[i][j] - grid[i][j]\\}$,
+- Так как мы хотим максимизировать $\underset{i, j}{\sum}\\{grid'[i][j] - grid[i][j]\\}$,
 то нам необходимо максимизировать $grid'[i][j]$ для всех $i, j$
 - Заметим, что
   - $\forall i, j: grid'[i][j] \leq \underset{0 \leq k < n}{\max}\\{grid[i][k]\\}$
   - $\forall i, j: grid'[i][j] \leq \underset{0 \leq k < n}{\max}\\{grid[k][j]\\}$
   - так как если здание станет выше, чем самое высокое здание в его строке или столбце,
   то горизонт города изменится
-- Значит $\forall i, j: grid'[i][j] \leq \min(\underset{0 \leq k < n}{\max}\\{grid[i][k]\\}, \underset{0 \leq k < n}{\max}\\{grid[k][j]\\})$
+- Значит $$\forall i, j: grid'[i][j] \leq \min(\underset{0 \leq k < n}{\max}\\{grid[i][k]\\}, \underset{0 \leq k < n}{\max}\\{grid[k][j]\\})$$
 - Отсюда уже очевидно, что $$grid'[i][j] = \min(\underset{0 \leq k < n}{\max}\\{grid[i][k]\\}, \underset{0 \leq k < n}{\max}\\{grid[k][j]\\})$$
+- А ответ это $$\underset{i, j}{\sum}\\{\min(\underset{0 \leq k < n}{\max}\\{grid[i][k]\\}, \underset{0 \leq k < n}{\max}\\{grid[k][j]\\}) - grid[i][j]\\}$$
 
 {{< spoiler text="Python" >}}
 ```python
