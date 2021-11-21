@@ -73,4 +73,7 @@ email: ""
 highlight_name: true
 ---
 
+- Про `Google Summer of Code 2021` [можно прочитать здесь]({{< relref "/tags/gsoc" >}})
+- Мои решения задачек с `LeetCode` [можно прочитать здесь]({{< relref "/tags/leetcode" >}})
+
 [comment]: <> ({{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.)

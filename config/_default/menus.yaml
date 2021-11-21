@@ -4,14 +4,11 @@
 #   The weight parameter defines the order that the links will appear in.
 
 main:
-  - name: 🏠 About
+  - name: Обо мне
     url: '#about'
     weight: 10
-#  - name: 🌞 Daily
-#    url: '#daily'
-#    weight: 20
-  - name: ✍ Posts
-    url: '#posts'
+  - name: Блог
+    url: '/post'
     weight: 30
 #  - name: Projects
 #    url: '#projects'
