@@ -1,7 +1,8 @@
 # IDEs
 .idea/
+.editorconfig
+.DS_Store
 
-# Hugo
 /resources/
 public/
 jsconfig.json

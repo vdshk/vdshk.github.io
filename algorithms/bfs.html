@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="footer">
+                <div id="footer">
+                    <a href="../index.html">&#183;vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a>
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <!-- 2. Create hidden header/footer <div> -->
+                <section>
+                    <section><h2>Breadth First Search</h2></section>
+                    <section>
+                        <ul>
+                            <li>Input:</li>
+                            <ul>
+                                <li>
+                                    directed or undirected unweighted <code notion-code>graph</code> with <code notion-code>N</code> nodes and <code notion-code>M</code> edges
+                                </li>
+                                <li>
+                                    <code notion-code>source node</code>
+                                </li>
+                            </ul>
+                            <li>Output:</li>
+                            <ul>
+                                <li>
+                                    array <code notion-code>distance</code> of length <code notion-code>N</code>, where:
+                                </li>
+                                <ul>
+                                    <li>
+                                        <code notion-code>d[i]</code> - the shortest distance from <code notion-code>source node</code> to node <code notion-code>i</code> if <code notion-code>i</code> is reachable
+                                    </li>
+                                    <li>
+                                        <code notion-code>d[i] = $\infty$</code> otherwise
+                                    </li>
+                                </ul>
+                            </ul>
+                            <li>Time complexity:</li>
+                            <ul>
+                                <li>the algorithm works in $O(N + M)$</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <h3>Step 1. Initialization</h3>
+                        Create a <code notion-code>queue</code> which will contain the nodes to be processed.
+
+                        Initially, push the <code notion-code>source node</code> to the <code notion-code>queue</code> and
+                        set <code notion-code>distance[source_node] = 0</code>, and for all other nodes <code notion-code>v</code>
+                        set <code notion-code>distance[v] = -1</code>.
+                    </section>
+                    <section>
+                        <h3>Step 2. Loop iteration</h3>
+                        Loop until the <code notion-code>queue</code> is empty and in each iteration,
+                        pop a node <code notion-code>u</code> from the front of the <code notion-code>queue</code>.
+                        Iterate through all the edges going out of this node <code notion-code>u</code> and
+                        if some of these edges go to nodes that are not already visited <nobr>(i.e. <code notion-code>distance[v] = -1</code>)</nobr>,
+                        set <code notion-code>distance[v] = distance[u] + 1</code> and place them in the <code notion-code>queue</code>.
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        Let's see how the Breadth First Search algorithm works with an example.
+                        We use an undirected graph with 5 nodes.
+                        <img data-src="./static/bfs/bfs-step-0.svg" />
+                    </section>
+                    <section>
+                        We start from <code notion-code>node 1</code>.
+                        The BFS algorithm starts by putting it in the <code notion-code>queue</code>
+                        and setting <code notion-code>distance[1] = 0</code>.
+                        <img data-src="./static/bfs/bfs-step-1.svg" />
+                    </section>
+                    <section>
+                        Next, we iterate through all the edges from <code notion-code>node 1</code>,
+                        adding all unvisited neighbours (<code notion-code>node 2</code>, <code notion-code>node 3</code>) to the queue and setting
+                        <code notion-code>distance[2] = 1</code> and <code notion-code>distance[3] = 1</code>.
+                        <img data-src="./static/bfs/bfs-step-2.svg" />
+                    </section>
+                    <section>
+                        Next, we iterate through all the edges from <code notion-code>node 2</code>,
+                        adding all unvisited neighbours (<code notion-code>node 4</code>) to the queue and setting
+                        <code notion-code>distance[4] = 2</code>.
+                        <img data-src="./static/bfs/bfs-step-3.svg" />
+                    </section>
+                    <section>
+                        Next, we iterate through all the edges from <code notion-code>node 3</code>,
+                        adding all unvisited neighbours (<code notion-code>node 5</code>) to the queue and setting
+                        <code notion-code>distance[5] = 2</code>.
+                        <img data-src="./static/bfs/bfs-step-4.svg" />
+                    </section>
+                    <section>
+                        After we visit the <code notion-code>node 4</code>, it doesn't have any unvisited adjacent nodes, so we just pop it from queue.
+                        Same for <code notion-code>node 5</code>, so we have completed Breadth First Search.
+                        <img data-src="./static/bfs/bfs-step-5.svg" />
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section>
+                        <h2>Python</h2>
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        def bfs(
+                            graph: Graph,              # Node-To-Neighbours Dict
+                            distance: Dict[Node, int], # Node-To-Distance Dict
+                            source_node: Node
+                        ):
+                            from collections import deque
+
+                            distance[source_node] = 0  #Initially distance[v] = -1 for all v
+                            queue = deque([source_node])
+                            while queue:
+                                u = queue.popleft()
+                                for v in graph[u]:
+                                    if distance[v] == -1:
+                                        distance[v] = distance[u] + 1
+                                        queue.append(v)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>C++</h2>
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        void bfs(
+                            const std::vector<std::vector<int32_t>> &graph,
+                            std::vector<int32_t> &distance,
+                            int32_t source_node
+                        )
+                        {
+                            distance[source_node] = 0;
+                            std::deque<int32_t> queue = {source_node};  // #include <deque>
+                            while (false == queue.empty())
+                            {
+                                int32_t u = queue.front();
+                                queue.pop_front();
+                                for (int32_t v : graph[u])
+                                {
+                                    if (-1 == distance[v])
+                                    {
+                                        distance[v] = distance[u] + 1;
+                                        queue.push_back(v);
+                                    }
+                                }
+                            }
+                        }
+                        </script></code></pre>
+                    </section>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../js/footer.js"></script>
+    </body>
+</html>

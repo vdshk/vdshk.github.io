@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="footer">
+                <div id="footer">
+                    <a href="../index.html">&#183;vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a>
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section>
+                        <h2>Depth First Search</h2>
+                    </section>
+                    <section>
+                        <ul>
+                            <li>Input:</li>
+                            <ul>
+                                <li>
+                                    directed or undirected <code notion-code>graph</code> with <code notion-code>N</code> nodes and <code notion-code>M</code> edges
+                                </li>
+                                <li>
+                                    <code notion-code>source node</code>
+                                </li>
+                            </ul>
+                            <li>Output:</li>
+                            <ul>
+                                <li>
+                                    array <code notion-code>reachable</code> of length <code notion-code>N</code>, where:
+                                </li>
+                                <ul>
+                                    <li>
+                                        <code notion-code>reachable[i] = 1</code> if node <code notion-code>i</code> is reachable from <code notion-code>source node</code>
+                                    </li>
+                                    <li>
+                                        <code notion-code>reachable[i] = 0</code> otherwise
+                                    </li>
+                                </ul>
+                            </ul>
+                            <li>Time complexity:</li>
+                            <ul>
+                                <li>the algorithm works in $O(N + M)$</li>
+                            </ul>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section data-markdown>
+                        The idea behind DFS is to go as deep into the graph as
+                        possible, and backtrack once you are at a node without
+                        any unvisited adjacent node. It is very easy to describe
+                        the algorithm recursively.
+                    </section>
+                    <section data-markdown>
+                        We start the search at one
+                        node. After visiting a node, we further perform a DFS
+                        for each adjacent node that we haven't visited before.
+                        This way we visit all node that are reachable from the
+                        starting node.
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        Let's see how the Depth First Search algorithm works
+                        with an example. We use an undirected graph with 5
+                        nodes.
+                        <img data-src="./static/dfs/graph-dfs-step-0.webp" />
+                    </section>
+                    <section>
+                        We start from node 0, the DFS algorithm starts by
+                        putting it in the Visited list and putting all its
+                        adjacent nodes in the stack.
+                        <img data-src="./static/dfs/graph-dfs-step-1.webp" />
+                    </section>
+                    <section>
+                        Next, we visit the node at the top of stack i.e. 1 and
+                        go to its adjacent nodes. Since 0 has already been
+                        visited, we visit 2 instead.
+                        <img data-src="./static/dfs/graph-dfs-step-2.webp" />
+                    </section>
+                    <section>
+                        Node 2 has an unvisited adjacent node in 4, so we add
+                        that to the top of the stack and visit it.
+                        <img data-src="./static/dfs/graph-dfs-step-3.webp" />
+                    </section>
+                    <section>
+                        Next, we visit the node at the top of stack i.e. 4 and
+                        go to its adjacent nodes. Since 4 adjacent nodes already
+                        been visited, we visit 3 insted.
+                        <img data-src="./static/dfs/graph-dfs-step-4.webp" />
+                    </section>
+                    <section>
+                        After we visit the last node 3, it doesn't have any
+                        unvisited adjacent nodes, so we have completed the Depth
+                        First Search of the graph.
+                        <img data-src="./static/dfs/graph-dfs-step-5.webp" />
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section>
+                        <h2>Python</h2>
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        def dfs(
+                            graph: Graph,                 # Node-To-Neighbours Dict
+                            reachable: Dict[Node, bool],  # Node-Is-Reachable Dict
+                            node: Node
+                        ):
+                            reachable[node] = True
+                            for neighbour in graph[node]:
+                                if reachable[neighbour] == False:
+                                    dfs(graph, reachable, neighbour)
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>C++</h2>
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        void dfs(
+                            const vector<vector<int>> &graph,
+                            vector<bool> &reachable,
+                            int node
+                        )
+                        {
+                            reachable[node] = true;
+                            for (int neighbour : graph[node])
+                            {
+                                if (reachable[neighbour] == false)
+                                {
+                                    dfs(graph, reachable, neighbour);
+                                }
+                            }
+                        }
+                        </script></code></pre>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../js/footer.js"></script>
+    </body>
+</html>
