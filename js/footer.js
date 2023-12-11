@@ -8,7 +8,6 @@ function updateFooter() {
     footer.style["text-align"] = "center";
     footer.style.transform =
         document.getElementsByClassName("slides")[0].style.transform;
-    console.log(footer);
     $("div.reveal").append(footer);
 }
 function updateFooterOnWindowResize(event) {
