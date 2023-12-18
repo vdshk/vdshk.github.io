@@ -8,7 +8,7 @@
         />
 
         <title>vadyushkins</title>
-		<link rel="icon" type="image/x-icon" href="../dist/icon.png">
+		<link rel="icon" type="image/webp" href="../dist/icon.webp">
 
         <link rel="stylesheet" href="../dist/reset.css" />
         <link rel="stylesheet" href="../dist/reveal.css" />
@@ -20,10 +20,8 @@
     </head>
     <body>
         <div id="hidden" style="display:none;">
-            <div id="footer">
-                <div id="footer">
-                    <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a>
-                </div>
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./dfs.html">&#183;DFS</a>
             </div>
         </div>
         <div class="reveal">
@@ -31,29 +29,32 @@
                 <section>
                     <section>
                         <h2>Depth First Search</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
                     </section>
                     <section>
+                        <p>
                         <ul>
                             <li>Input:</li>
                             <ul>
                                 <li>
-                                    directed or undirected <code notion-code>graph</code> with <code notion-code>N</code> nodes and <code notion-code>M</code> edges
+                                    directed or undirected <code inline>graph</code> with <code inline>N</code> nodes and <code inline>M</code> edges
                                 </li>
                                 <li>
-                                    <code notion-code>source node</code>
+                                    <code inline>source node</code>
                                 </li>
                             </ul>
                             <li>Output:</li>
                             <ul>
                                 <li>
-                                    array <code notion-code>reachable</code> of length <code notion-code>N</code>, where:
+                                    array <code inline>reachable</code> of length <code inline>N</code>, where:
                                 </li>
                                 <ul>
                                     <li>
-                                        <code notion-code>reachable[i] = 1</code> if node <code notion-code>i</code> is reachable from <code notion-code>source node</code>
+                                        <code inline>reachable[i] = 1</code> if node <code inline>i</code> is reachable from <code inline>source node</code>
                                     </li>
                                     <li>
-                                        <code notion-code>reachable[i] = 0</code> otherwise
+                                        <code inline>reachable[i] = 0</code> otherwise
                                     </li>
                                 </ul>
                             </ul>
@@ -62,6 +63,7 @@
                                 <li>the algorithm works in $O(N + M)$</li>
                             </ul>
                         </ul>
+                        </p>
                     </section>
                 </section>
 
@@ -69,18 +71,22 @@
                     <section>
                         <h2>Description</h2>
                     </section>
-                    <section data-markdown>
-                        The idea behind DFS is to go as deep into the graph as
-                        possible, and backtrack once you are at a node without
-                        any unvisited adjacent node. It is very easy to describe
-                        the algorithm recursively.
+                    <section>
+                        <p>
+                            The idea behind DFS is to go as deep into the graph as
+                            possible, and backtrack once you are at a node without
+                            any unvisited adjacent node. It is very easy to describe
+                            the algorithm recursively.
+                        </p>
                     </section>
-                    <section data-markdown>
-                        We start the search at one
-                        node. After visiting a node, we further perform a DFS
-                        for each adjacent node that we haven't visited before.
-                        This way we visit all node that are reachable from the
-                        starting node.
+                    <section>
+                        <p>
+                            We start the search at one
+                            node. After visiting a node, we further perform a DFS
+                            for each adjacent node that we haven't visited before.
+                            This way we visit all node that are reachable from the
+                            starting node.
+                        </p>
                     </section>
                 </section>
 
@@ -89,75 +95,110 @@
                         <h2>Example</h2>
                     </section>
                     <section>
-                        Let's see how the Depth First Search algorithm works
-                        with an example. We use an undirected graph with 5
-                        nodes.
-                        <img data-src="./static/dfs/graph-dfs-step-0.webp" />
+                        <p>
+                            Let's see how the Depth First Search algorithm works
+                            with an example. We use an undirected graph with 5
+                            nodes.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-0.svg" />
                     </section>
                     <section>
-                        We start from node 0, the DFS algorithm starts by
-                        putting it in the Visited list and putting all its
-                        adjacent nodes in the stack.
-                        <img data-src="./static/dfs/graph-dfs-step-1.webp" />
+                        <p>
+                            We start from <code inline>node 1</code>, the DFS algorithm starts by
+                            setting <code inline>reachable[1] = 1</code> and going to <code inline>node 2</code> -
+                            first unvisited neighbour of <code inline>node 1</code>.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-1.svg" />
                     </section>
                     <section>
-                        Next, we visit the node at the top of stack i.e. 1 and
-                        go to its adjacent nodes. Since 0 has already been
-                        visited, we visit 2 instead.
-                        <img data-src="./static/dfs/graph-dfs-step-2.webp" />
+                        <p>
+                            DFS visit <code inline>node 2</code>, set
+                            <code inline>reachable[2] = 1</code> and go to <code inline>node 3</code> -
+                            first unvisited neighbour of <code inline>node 2</code>.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-2.svg" />
                     </section>
                     <section>
-                        Node 2 has an unvisited adjacent node in 4, so we add
-                        that to the top of the stack and visit it.
-                        <img data-src="./static/dfs/graph-dfs-step-3.webp" />
+                        <p>
+                            DFS visit <code inline>node 3</code>, set
+                            <code inline>reachable[3] = 1</code> and go to <code inline>node 5</code> -
+                            first unvisited neighbour of <code inline>node 3</code>.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-3.svg" />
                     </section>
                     <section>
-                        Next, we visit the node at the top of stack i.e. 4 and
-                        go to its adjacent nodes. Since 4 adjacent nodes already
-                        been visited, we visit 3 insted.
-                        <img data-src="./static/dfs/graph-dfs-step-4.webp" />
+                        <p>
+                            DFS visit <code inline>node 5</code>, set
+                            <code inline>reachable[5] = 1</code> and backtrack to <code inline>node 3</code>
+                            because <code inline>node 5</code> has not any unvisited neighbour.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-4.svg" />
                     </section>
                     <section>
-                        After we visit the last node 3, it doesn't have any
-                        unvisited adjacent nodes, so we have completed the Depth
-                        First Search of the graph.
-                        <img data-src="./static/dfs/graph-dfs-step-5.webp" />
+                        <p>
+                            DFS backtrack from <code inline>node 3</code> to <code inline>node 2</code>
+                            because <code inline>node 3</code> has not any unvisited neighbour.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-5.svg" />
+                    </section>
+                    <section>
+                        <p>
+                            DFS backtrack from <code inline>node 2</code> to <code inline>node 1</code>
+                            because <code inline>node 2</code> has not any unvisited neighbour.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-6.svg" />
+                    </section>
+                    <section>
+                        <p>
+                            DFS backtrack to <code inline>node 1</code>
+                            and go to <code inline>node 4</code> -
+                            next unvisited neighbour of <code inline>node 1</code>.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-7.svg" />
+                    </section>
+                    <section>
+                        <p>
+                            DFS visit <code inline>node 4</code>, set
+                            <code inline>reachable[4] = 1</code> and backtrack to <code inline>node 1</code>
+                            because <code inline>node 5</code> has not any unvisited neighbour.
+                            The Depth First Search has completed.
+                        </p>
+                        <img data-src="./static/dfs/dfs-step-8.svg" />
                     </section>
                 </section>
 
                 <section>
                     <section><h2>Code</h2></section>
-                    <section>
-                        <h2>Python</h2>
+                    <section id="python">
+                        Python
                         <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
                         def dfs(
-                            graph: Graph,                 # Node-To-Neighbours Dict
-                            reachable: Dict[Node, bool],  # Node-Is-Reachable Dict
-                            node: Node
-                        ):
+                            graph: Dict[int, List[int]],
+                            reachable: Dict[int, bool],
+                            node: int,
+                        ) -> Dict[int, bool]:
                             reachable[node] = True
                             for neighbour in graph[node]:
-                                if reachable[neighbour] == False:
+                                if False == reachable[neighbour]:
                                     dfs(graph, reachable, neighbour)
+                            return reachable
                         </code></pre>
                     </section>
-                    <section>
-                        <h2>C++</h2>
+                    <section id="cpp">
+                        C++
                         <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
-                        void dfs(
-                            const vector<vector<int>> &graph,
-                            vector<bool> &reachable,
-                            int node
-                        )
-                        {
+                        std::vector<bool> &dfs(
+                            const std::vector<std::vector<int64_t>> &graph,
+                            std::vector<bool> &reachable,
+                            int64_t node
+                        ) {
                             reachable[node] = true;
-                            for (int neighbour : graph[node])
-                            {
-                                if (reachable[neighbour] == false)
-                                {
+                            for (int64_t neighbour : graph[node]) {
+                                if (false == reachable[neighbour]) {
                                     dfs(graph, reachable, neighbour);
                                 }
                             }
+                            return reachable;
                         }
                         </script></code></pre>
                     </section>
@@ -200,8 +241,6 @@
                 },
             });
         </script>
-
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../js/footer.js"></script>
+        <script src="../js/header.js"></script>
     </body>
 </html>

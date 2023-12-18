@@ -8,21 +8,20 @@
         />
 
         <title>vadyushkins</title>
-		<link rel="icon" type="image/x-icon" href="../dist/icon.png">
+		<link rel="icon" type="image/webp" href="../dist/icon.webp">
 
         <link rel="stylesheet" href="../dist/reset.css" />
         <link rel="stylesheet" href="../dist/reveal.css" />
         <link rel="stylesheet" href="../dist/theme/my-simple.css" />
 
         <!-- Theme used for syntax highlighted code -->
-        <link rel="stylesheet" href="../plugin/highlight/dracula.css" />
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
     </head>
     <body>
         <div id="hidden" style="display:none;">
-            <div id="footer">
-                <div id="footer">
-                    <a href="../index.html">vadyushkins</a>
-                </div>
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html">&#183;Algorithms</a>
             </div>
         </div>
         <div class="reveal">
@@ -33,10 +32,9 @@
                 <section>
                     <section><h2>Graphs</h2></section>
                     <section>
-                        <ul>
-                            <li><a href="./dfs.html">DFS</a></li>
-                            <li><a href="./bfs.html">BFS</a></li>
-                        </ul>
+                        <a href="./dfs.html">DFS</a><br>
+                        <a href="./bfs.html">BFS</a><br>
+                        <a href="./dijkstra.html">Dijkstra</a><br>
                     </section>
                 </section>
             </div>
@@ -62,8 +60,6 @@
                 ],
             });
         </script>
-
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="../js/footer.js"></script>
+        <script src="../js/header.js"></script>
     </body>
 </html>

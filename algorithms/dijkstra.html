@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>vadyushkins</title>
+		<link rel="icon" type="image/webp" href="../dist/icon.webp">
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./dijkstra.html">&#183;Dijkstra</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <!-- 2. Create hidden header/footer <div> -->
+                <section>
+                    <section>
+                        <h2>Dijkstra</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
+                    </section>
+                    <section>
+                        <p>
+                        <ul>
+                            <li>Input:</li>
+                            <ul>
+                                <li>
+                                    directed or undirected <b>weighted</b> <code inline>graph</code> with <code inline>N</code> nodes and <code inline>M</code> edges
+                                </li>
+                                <li>
+                                    <code inline>source node</code>
+                                </li>
+                            </ul>
+                            <li>Output:</li>
+                            <ul>
+                                <li>
+                                    array <code inline>distance</code> of length <code inline>N</code>, where:
+                                </li>
+                                <ul>
+                                    <li>
+                                        <code inline>d[i]</code> - the shortest distance from <code inline>source node</code> to node <code inline>i</code> if <code inline>i</code> is reachable
+                                    </li>
+                                    <li>
+                                        <code inline>d[i] = $\infty$</code> otherwise
+                                    </li>
+                                </ul>
+                            </ul>
+                            <li>Time complexity:</li>
+                            <ul>
+                                <li>the algorithm works in $O(N^2 + M)$</li>
+                            </ul>
+                        </ul>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <h3>Initialization</h3>
+                        <p>
+                            Set <code inline>distance[source_node] = 0</code>,
+                            and for all other nodes <code inline>v</code> set <code inline>distance[v] = -1</code>.
+                            
+                            Boolean array <code inline>relaxed</code>
+                            stores for each node <code inline>v</code> whether it's already relaxed.
+                            Initially all nodes are unrelaxed.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Relaxation</h3>
+                        <p>
+                            The Dijkstra's algorithm runs for <code inline>N</code> iterations.
+                            At each iteration a node <code inline>u</code> is chosen as unrelaxed node
+                            which has the least value <code inline>distance[u]</code>.
+
+                            Next, from node <code inline>u</code> relaxations are performed:
+                            all edges of the form <code inline>(u, w, v)</code> are considered,
+                            and for each node <code inline>v</code> the algorithm tries to improve the value
+                            <code inline>distance[v]</code> by applying
+                            <nobr><code inline>distance[v] = min(distance[v], distance[u] + w)</code></nobr>.
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Relaxation</h3>
+                        <p>
+                            After all such edges are considered, the current iteration ends
+                            and node <code inline>u</code> marked as relaxed.
+                            
+                            Finally, after <code inline>N</code> iterations, all nodes will be marked, and the algorithm terminates.
+                            We claim that the found values <code inline>distance[v]</code> are the lengths of shortest paths
+                            from <code inline>source_node</code> to all nodes <code inline>v</code>.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Let's see how the Dijkstra algorithm works with an example.
+                            We use an undirected graph with 7 nodes.
+                        </p>
+                            <img data-src="./static/dijkstra/dijkstra-step-0.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            We start from <code inline>node 1</code>.
+                            The Dijkstra algorithm starts by setting <code inline>distance[1] = 0</code>
+                            and for any other <code inline>node v</code>: <code inline>distance[v] = -1</code>.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-1.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Dijkstra algorithm found unrelaxed node with least
+                            <code inline>distance</code> value - <code inline>node 1</code>
+                            and perform relaxations along all its edges.
+                            It set <code inline>distance[2] = 1</code>,
+                            <code inline>distance[3] = 2</code> and
+                            mark <code inline>node 1</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-2.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next node is <code inline>node 2</code>.
+                            Dijkstra algorithm set <code inline>distance[4] = 3</code>,
+                            <code inline>distance[5] = 4</code> and
+                            mark <code inline>node 2</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-3.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next node is <code inline>node 3</code>.
+                            Dijkstra algorithm set <code inline>distance[6] = 3</code> and
+                            mark <code inline>node 3</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-4.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next node is <code inline>node 4</code>.
+                            Dijkstra algorithm did not update any <code inline>distance</code> and
+                            just mark <code inline>node 4</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-5.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next node is <code inline>node 6</code>.
+                            Dijkstra algorithm set <code inline>distance[7] = 4</code> and
+                            mark <code inline>node 6</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-6.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next node is <code inline>node 5</code>.
+                            Dijkstra algorithm did not update any <code inline>distance</code> and
+                            just mark <code inline>node 5</code> as relaxed.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-7.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Next and last node is <code inline>node 7</code>.
+                            Dijkstra algorithm did not update any <code inline>distance</code> and
+                            just mark <code inline>node 7</code> as relaxed.
+                            Dijkstra algorithm is finished.
+                        </p>
+                        <img data-src="./static/dijkstra/dijkstra-step-8.svg"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section id="python">
+                        Python
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        def dijkstra(
+                            graph: Dict[int, List[Tuple[int, int]]],
+                            source_node: int,
+                        ) -> List[int]:
+                            n = len(graph)
+                            distance = [-1] * n
+                            relaxed = [False] * n
+                        
+                            distance[source_node] = 0
+                            for i in range(n):
+                                u = -1
+                                for j in range(n):
+                                    if relaxed[j] == False and (
+                                        u == -1 or (distance[j] != -1 and distance[j] < distance[u])
+                                    ):
+                                        u = j
+                                if u == -1:
+                                    break
+                                for v, w in graph[u]:
+                                    if distance[v] == -1 or distance[v] > distance[u] + w:
+                                        distance[v] = distance[u] + w
+                                relaxed[u] = True
+                        
+                            return distance
+                        </code></pre>
+                    </section>
+                    <section id="cpp">
+                        C++
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        std::vector<int64_t> dijkstra(
+                            const std::vector<std::vector<std::pair<int64_t, int64_t>>> graph,
+                            const int64_t source_node
+                        ) {
+                            std::size_t n = graph.size();
+                            std::vector<int64_t> distance(n, -1);
+                            std::vector<bool> relaxed(n, false);
+                        
+                            distance[source_node] = 0;
+                            for (std::size_t i = 0; i < n; ++i) {
+                                int64_t u = -1;
+                                for (int64_t j = 0; j < n; ++j) {
+                                    if (
+                                        relaxed[j] == false && (
+                                            u == -1 || (
+                                                distance[j] != -1 &&
+                                                distance[j] < distance[u]
+                                            )
+                                        )
+                                    ) {
+                                        u = j;
+                                    }
+                                }
+                                if (u == -1) {
+                                    break;
+                                }
+                        
+                                for (const auto &[v, w] : graph[u]) {
+                                    if (
+                                        distance[v] == -1 ||
+                                        distance[v] > distance[u] + w
+                                    ) {
+                                        distance[v] = distance[u] + w;
+                                    }
+                                }
+                        
+                                relaxed[u] = true;
+                            }
+                        
+                            return distance;
+                        }
+                        </script></code></pre>
+                    </section>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+        <script src="../js/header.js"></script>
+    </body>
+</html>
