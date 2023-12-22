@@ -21,14 +21,14 @@
     <body>
         <div id="hidden" style="display:none;">
             <div id="header">
-                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./bridges.html">&#183;Bridges</a>
+                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./cutpoints.html">&#183;Cutpoints</a>
             </div>
         </div>
         <div class="reveal">
             <div class="slides">
                 <section>
                     <section>
-                        <h2>Bridges Search</h2>
+                        <h2>Cut Points Search</h2>
                         <a href="#/python">Python</a>
                         <a href="#/cpp">C++</a>
                     </section>
@@ -40,12 +40,12 @@
                                 <code inline>N</code> nodes and <code inline>M</code> edges
                             </li>
                             <li>
-                                Output: array <code inline>bridges</code> of <code inline>graph</code> bridges
+                                Output: array <code inline>cutpoints</code> of <code inline>graph</code> cut points
                             </li>
                             <li>Time complexity: $O(N + M)$</li>
                             <br>
                             <q>
-                                <b><u>Bridge</u></b> - is an edge of a graph whose deletion increases
+                                <b><u>Cut point</u></b> - is a node of a graph whose deletion increases
                                 the graph's number of connected components
                             </q>
                         </ul>
@@ -63,12 +63,17 @@
                             and run <a href="./dfs.html">depth first search</a> from it.
                         </p>
                         <p>
-                            Let's say we are in the DFS, looking through the edges starting from node <code inline>u</code>.
-                            The current edge <code inline>(u, v)</code> is a bridge if and only if
-                            none of the nodes <code inline>v</code> with its descendants in the DFS traversal tree
-                            has a back-edge to node <code inline>u</code> or any of its ancestors.
-                            This condition means that there is no other way from <code inline>u</code>
-                            to <code inline>v</code> except for edge <code inline>(u, v)</code>.
+                            Let's say we are in the DFS, looking through the edges starting from
+                            node <code inline>u $\neq$ source_node</code>.
+                            If the current edge <code inline>(u, v)</code> is such that none of the nodes
+                            <code inline>v</code> or its descendants in the DFS traversal tree has a back-edge
+                            to any of ancestors of <code inline>u</code>, then <code inline>u</code> is a cut point.
+                            Otherwise, <code inline>u</code> is not a cut point.
+                        </p>
+                        <p>
+                            Let's consider the remaining case of <code inline>u $=$ source_node</code>.
+                            This node will be a cut point if and only if this node has more than one child
+                            in the DFS traversal tree.
                         </p>
                     </section>
                     <section>
@@ -95,14 +100,15 @@
                             Now, there is a back edge from node <code inline>u</code> or
                             one of its descendants to one of its ancestors if and only if
                             node <code inline>u</code> has a child <code inline>v</code>
-                            for which <code inline>lowpoint[v] $\leq$ entry_time[u]</code>.
+                            for which <code inline>lowpoint[v] $<$ entry_time[u]</code>.
                             If <code inline>lowpoint[v] = entry_time[u]</code>,
                             the back edge comes directly to <code inline>u</code>,
                             otherwise it comes to one of the ancestors of <code inline>u</code>.
                         </p>
                         <p>
-                            Thus, the current edge <code inline>(u, v)</code> in the DFS
-                            tree is a bridge if and only if <code inline>lowpoint[v] > entry_time[u]</code>.
+                            Thus, the current node <code inline>u</code> in the DFS
+                            tree is a cut point if and only if
+                            <code inline>lowpoint[v] $\geq$ entry_time[u]</code>.
                         </p>
                     </section>
                 </section>
@@ -113,127 +119,128 @@
                     </section>
                     <section>
                         <p>
-                            Let's see how the Bridges Search algorithm works with an example.
+                            Let's see how the Cut Points Search algorithm works with an example.
                             We use an undirected graph with 7 nodes.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-0.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-0.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search algorithm starts from <code inline>node 1</code> and set
+                            Cut Points Search algorithm starts from <code inline>node 1</code> and set
                             <code inline>visited[1] = 1</code>, <code inline>entry_time[1] = 0</code>,
                             <code inline>lowpoint[1] = 0</code>, <code inline>timer = 1</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-1.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-1.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 2</code> and set
+                            Cut Points Search moves to <code inline>node 2</code> and set
                             <code inline>visited[2] = 1</code>, <code inline>entry_time[2] = 1</code>,
                             <code inline>lowpoint[2] = 1</code>, <code inline>timer = 2</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-2.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-2.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 3</code> and set
+                            Cut Points Search moves to <code inline>node 3</code> and set
                             <code inline>visited[3] = 1</code>, <code inline>entry_time[3] = 2</code>,
                             <code inline>lowpoint[3] = 2</code>, <code inline>timer = 3</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-3.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-3.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 4</code> and set
+                            Cut Points Search moves to <code inline>node 4</code> and set
                             <code inline>visited[4] = 1</code>, <code inline>entry_time[4] = 3</code>,
                             <code inline>lowpoint[4] = 3</code>, <code inline>timer = 4</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-4.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-4.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 7</code> and set
+                            Cut Points Search moves to <code inline>node 7</code> and set
                             <code inline>visited[7] = 1</code>, <code inline>entry_time[7] = 4</code>,
                             <code inline>lowpoint[7] = 4</code>, <code inline>timer = 5</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-5.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-5.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 7</code> to <code inline>node 4</code>.
-                            Since <code inline>lowpoint[7] = 4 > 3 = entry_time[4]</code>,
-                            Bridges Search marks edge <code inline>(4, 7)</code> as a
-                            <b style="color: #FF0000;">bridge</b>.
+                            Cut Points Search backtrack from <code inline>node 7</code> to <code inline>node 4</code>.
+                            Since <code inline>lowpoint[7] = 4 $\geq$ 3 = entry_time[4]</code>,
+                            Cut Points Search marks <code inline>node 4</code> as a
+                            <b style="color: #FF0000;">cut point</b>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-6.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-6.svg"/>
                     </section>
                     <section>
                         <p>
                             Considering edge <code inline>(4, 1)</code>
-                            Bridges Search update <code inline>lowpoint[4] = 0</code>.
+                            Cut Points Search update <code inline>lowpoint[4] = 0</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-7.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-7.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 4</code> to <code inline>node 3</code> and
+                            Cut Points Search backtrack from <code inline>node 4</code> to
+                            <code inline>node 3</code> and
                             set <code inline>lowpoint[3] = 0</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-8.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-8.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 6</code> and set
+                            Cut Points Search moves to <code inline>node 6</code> and set
                             <code inline>visited[6] = 1</code>, <code inline>entry_time[6] = 5</code>,
                             <code inline>lowpoint[6] = 5</code>, <code inline>timer = 6</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-9.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-9.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 6</code> to <code inline>node 3</code>.
-                            Since <code inline>lowpoint[6] = 5 > 2 = entry_time[3]</code>,
-                            Bridges Search marks edge <code inline>(3, 6)</code> as a
-                            <b style="color: #FF0000;">bridge</b>.
+                            Cut Points Search backtrack from <code inline>node 6</code> to <code inline>node 3</code>.
+                            Since <code inline>lowpoint[6] = 5 $\geq$ 2 = entry_time[3]</code>,
+                            Cut Points Search marks <code inline>node 3</code> as a
+                            <b style="color: #FF0000;">cut point</b>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-10.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-10.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 3</code> to <code inline>node 2</code> and
+                            Cut Points Search backtrack from <code inline>node 3</code> to <code inline>node 2</code> and
                             set <code inline>lowpoint[2] = 0</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-11.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-11.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search moves to <code inline>node 5</code> and set
+                            Cut Points Search moves to <code inline>node 5</code> and set
                             <code inline>visited[5] = 1</code>, <code inline>entry_time[5] = 6</code>,
                             <code inline>lowpoint[5] = 6</code>, <code inline>timer = 7</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-12.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-12.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 5</code> to <code inline>node 2</code>.
-                            Since <code inline>lowpoint[5] = 6 > 1 = entry_time[2]</code>,
-                            Bridges Search marks edge <code inline>(2, 5)</code> as a
-                            <b style="color: #FF0000;">bridge</b>.
+                            Cut Points Search backtrack from <code inline>node 5</code> to <code inline>node 2</code>.
+                            Since <code inline>lowpoint[5] = 6 $\geq$ 1 = entry_time[2]</code>,
+                            Cut Points Search marks <code inline>node 2</code> as a
+                            <b style="color: #FF0000;">cut point</b>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-13.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-13.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search backtrack from <code inline>node 2</code> to <code inline>node 1</code>
+                            Cut Points Search backtrack from <code inline>node 2</code> to <code inline>node 1</code>
                             without updating anything.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-14.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-14.svg"/>
                     </section>
                     <section>
                         <p>
-                            Bridges Search finished at <code inline>node 1</code>.
+                            Cut Points Search finished at <code inline>node 1</code>.
                         </p>
-                        <img data-src="./static/bridges/bridges-step-15.svg"/>
+                        <img data-src="./static/cutpoints/cutpoints-step-15.svg"/>
                     </section>
                 </section>
 
@@ -242,22 +249,23 @@
                     <section id="python">
                         Python
                         <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
-                        def bridges_search(graph: Dict[int, List[int]]) -> List[Tuple[int, int]]:
+                        def cutpoints_search(graph: Dict[int, List[int]]) -> List[Tuple[int, int]]:
                             n = len(graph)
                             visited = [False] * n
                             entry_time = [-1] * n
                             lowpoint = [-1] * n
                             timer = 0
                         
-                            bridges = []
+                            cutpoints = []
                         
                             def dfs(node: int, parent: int = -1):
-                                nonlocal visited, entry_time, lowpoint, timer, bridges
+                                nonlocal visited, entry_time, lowpoint, timer, cutpoints
                                 visited[node] = True
                                 entry_time[node] = timer
                                 lowpoint[node] = timer
                                 timer += 1
                         
+                                children_count = 0
                                 for neighbour in graph[node]:
                                     if neighbour == parent:
                                         continue
@@ -273,20 +281,23 @@
                                             lowpoint[node],
                                             lowpoint[neighbour],
                                         )
-                                        if lowpoint[neighbour] > entry_time[node]:
-                                            bridges.append((node, neighbour))
+                                        if lowpoint[neighbour] >= entry_time[node] and -1 != parent:
+                                            cutpoints.append(node)
+                                        children_count += 1
+                                if -1 == parent and children_count > 1:
+                                    cutpoints.append(node)
                         
                             for node in range(len(graph)):
                                 if False == visited[node]:
                                     dfs(node)
                         
-                            return bridges
+                            return cutpoints
                         </code></pre>
                     </section>
                     <section id="cpp">
                         C++
                         <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
-                        std::vector<std::pair<int64_t, int64_t>> bridges_search(
+                        std::vector<int64_t> cutpoints_search(
                             const std::vector<std::vector<int64_t>> &graph
                         ) {
                             std::size_t n = graph.size();
@@ -295,7 +306,7 @@
                             std::vector<int64_t> lowpoint(n);
                             int64_t timer = 0;
                         
-                            std::vector<std::pair<int64_t, int64_t>> bridges;
+                            std::vector<int64_t> cutpoints;
                         
                             std::function<void(int64_t, int64_t)> dfs;
                             dfs = [&](int64_t node, int64_t parent) {
@@ -304,6 +315,7 @@
                                 lowpoint[node] = timer;
                                 timer++;
                         
+                                int64_t children_count = 0;
                                 for (int64_t neighbour : graph[node]) {
                                     if (neighbour == parent) {
                                         continue;
@@ -321,10 +333,20 @@
                                             lowpoint[node],
                                             lowpoint[neighbour]
                                         );
-                                        if (lowpoint[neighbour] > entry_time[node]) {
-                                            bridges.emplace_back(node, neighbour);
+                                        if (
+                                            lowpoint[neighbour] >= entry_time[node] &&
+                                            -1 != parent
+                                        ) {
+                                            cutpoints.push_back(node);
                                         }
+                                        children_count++;
                                     }
+                                }
+                                if (
+                                    -1 == parent &&
+                                    children_count > 1
+                                ) {
+                                    cutpoints.push_back(node);
                                 }
                             };
                         
@@ -334,7 +356,7 @@
                                 }
                             }
                         
-                            return bridges;
+                            return cutpoints;
                         }
                         </script></code></pre>
                     </section>
