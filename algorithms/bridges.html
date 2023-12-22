@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>vadyushkins</title>
+        <link rel="icon" type="image/x-icon" href="../dist/favicon.ico">
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./bridges.html">&#183;Bridges</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section>
+                        <h2>Bridges Search</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
+                    </section>
+                    <section>
+                        <p>
+                        <ul>
+                            <li>
+                                Input: undirected <code inline>graph</code> with
+                                <code inline>N</code> nodes and <code inline>M</code> edges
+                            </li>
+                            <li>
+                                Output: array <code inline>bridges</code> of <code inline>graph</code> bridges
+                            </li>
+                            <li>Time complexity: $O(N + M)$</li>
+                            <br>
+                            <q>
+                                <b><u>Bridge</u></b> - is an edge of a graph whose deletion increases
+                                the graph's number of connected components
+                            </q>
+                        </ul>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Pick an arbitrary node as <code inline>source_node</code>
+                            and run <a href="./dfs.html">depth first search</a> from it.
+                        </p>
+                        <p>
+                            Let's say we are in the DFS, looking through the edges starting from node <code inline>u</code>.
+                            The current edge <code inline>(u, v)</code> is a bridge if and only if
+                            none of the vertices <code inline>v</code> with its descendants in the DFS traversal tree
+                            has a back-edge to vertex <code inline>u</code> or any of its ancestors.
+                            This condition means that there is no other way from <code inline>u</code>
+                            to <code inline>v</code> except for edge <code inline>(u, v)</code>.
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Let <code inline>entry_time[u]</code> denote DFS entry time for node <code inline>u</code>.
+                        </p>
+                        <p>
+                            Let <code inline>lowpoint[u]</code> denote the lowest entry time of neighbors of all descendants
+                            of <code inline>u</code> (including <code inline>u</code> itself) in the DFS tree.
+                        </p>
+                        <p>
+                            $$
+                            \operatorname{lowpoint[u]} = \operatorname{min}
+                                \begin{cases}
+                                    \operatorname{entry\_time[u]}\\
+                                    \operatorname{entry\_time[p]} & \forall \text{ back-edge } (u, p)\\
+                                    \operatorname{lowpoint[v]} & \forall \text{ DFS edge } (u, v)
+                                \end{cases}
+                            $$
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Now, there is a back edge from vertex <code inline>u</code> or
+                            one of its descendants to one of its ancestors if and only if
+                            vertex <code inline>u</code> has a child <code inline>v</code>
+                            for which <code inline>lowpoint[v] $\leq$ entry_time[u]</code>.
+                            If <code inline>lowpoint[v] = entry_time[u]</code>,
+                            the back edge comes directly to <code inline>v</code>,
+                            otherwise it comes to one of the ancestors of <code inline>u</code>.
+                        </p>
+                        <p>
+                            Thus, the current edge <code inline>(u, v)</code> in the DFS
+                            tree is a bridge if and only if <code inline>lowpoint[v] > entry_time[u]</code>.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Let's see how the Bridges Search algorithm works with an example.
+                            We use an undirected graph with 7 nodes.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-0.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search algorithm starts from <code inline>node 1</code> and set
+                            <code inline>visited[1] = 1</code>, <code inline>entry_time[1] = 0</code>,
+                            <code inline>lowpoint[1] = 0</code>, <code inline>timer = 1</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-1.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 2</code> and set
+                            <code inline>visited[2] = 1</code>, <code inline>entry_time[2] = 1</code>,
+                            <code inline>lowpoint[2] = 1</code>, <code inline>timer = 2</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-2.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 3</code> and set
+                            <code inline>visited[3] = 1</code>, <code inline>entry_time[3] = 2</code>,
+                            <code inline>lowpoint[3] = 2</code>, <code inline>timer = 3</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-3.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 4</code> and set
+                            <code inline>visited[4] = 1</code>, <code inline>entry_time[4] = 3</code>,
+                            <code inline>lowpoint[4] = 3</code>, <code inline>timer = 4</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-4.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 7</code> and set
+                            <code inline>visited[7] = 1</code>, <code inline>entry_time[7] = 4</code>,
+                            <code inline>lowpoint[7] = 4</code>, <code inline>timer = 5</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-5.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 7</code> to <code inline>node 4</code>.
+                            Since <code inline>lowpoint[7] = 4 > 3 = entry_time[4]</code>,
+                            Bridges Search marks edge <code inline>(4, 7)</code> as a
+                            <b style="color: #FF0000;">bridge</b>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-6.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Considering edge <code inline>(4, 1)</code>
+                            Bridges Search update <code inline>lowpoint[4] = 0</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-7.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 4</code> to <code inline>node 3</code> and
+                            set <code inline>lowpoint[3] = 0</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-8.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 6</code> and set
+                            <code inline>visited[6] = 1</code>, <code inline>entry_time[6] = 5</code>,
+                            <code inline>lowpoint[6] = 5</code>, <code inline>timer = 6</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-9.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 6</code> to <code inline>node 3</code>.
+                            Since <code inline>lowpoint[6] = 5 > 2 = entry_time[3]</code>,
+                            Bridges Search marks edge <code inline>(3, 6)</code> as a
+                            <b style="color: #FF0000;">bridge</b>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-10.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 3</code> to <code inline>node 2</code> and
+                            set <code inline>lowpoint[2] = 0</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-11.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search moves to <code inline>node 5</code> and set
+                            <code inline>visited[5] = 1</code>, <code inline>entry_time[5] = 6</code>,
+                            <code inline>lowpoint[5] = 6</code>, <code inline>timer = 7</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-12.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 5</code> to <code inline>node 2</code>.
+                            Since <code inline>lowpoint[5] = 6 > 1 = entry_time[2]</code>,
+                            Bridges Search marks edge <code inline>(2, 5)</code> as a
+                            <b style="color: #FF0000;">bridge</b>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-13.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search backtrack from <code inline>node 2</code> to <code inline>node 1</code>
+                            without updating anything.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-14.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Bridges Search finished at <code inline>node 1</code>.
+                        </p>
+                        <img data-src="./static/bridges/bridges-step-15.svg"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section id="python">
+                        Python
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        def bridges_search(graph: Dict[int, List[int]]) -> List[Tuple[int, int]]:
+                            n = len(graph)
+                            visited = [False] * n
+                            entry_time = [-1] * n
+                            lowpoint = [-1] * n
+                            timer = 0
+                        
+                            bridges = []
+                        
+                            def dfs(node: int, parent: int = -1):
+                                nonlocal visited, entry_time, lowpoint, timer
+                                visited[node] = True
+                                entry_time[node] = timer
+                                lowpoint[node] = timer
+                                timer += 1
+                        
+                                for neighbour in graph[node]:
+                                    if neighbour == parent:
+                                        continue
+                        
+                                    if visited[neighbour]:
+                                        lowpoint[node] = min(
+                                            lowpoint[node],
+                                            entry_time[neighbour],
+                                        )
+                                    else:
+                                        dfs(neighbour, parent=node)
+                                        lowpoint[node] = min(
+                                            lowpoint[node],
+                                            lowpoint[neighbour],
+                                        )
+                                        if lowpoint[neighbour] > entry_time[node]:
+                                            bridges.append((node, neighbour))
+                        
+                            for node in range(len(graph)):
+                                if False == visited[node]:
+                                    dfs(node)
+                        
+                            return bridges
+                        </code></pre>
+                    </section>
+                    <section id="cpp">
+                        C++
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        std::vector<std::pair<int64_t, int64_t>> bridges_search(
+                            const std::vector<std::vector<int64_t>> &graph
+                        ) {
+                            std::size_t n = graph.size();
+                            std::vector<bool> visited(n, false);
+                            std::vector<int64_t> entry_time(n);
+                            std::vector<int64_t> lowpoint(n);
+                            int64_t timer = 0;
+                        
+                            std::vector<std::pair<int64_t, int64_t>> bridges;
+                        
+                            std::function<void(int64_t, int64_t)> dfs;
+                            dfs = [&](int64_t node, int64_t parent) {
+                                visited[node] = true;
+                                entry_time[node] = timer;
+                                lowpoint[node] = timer;
+                                timer++;
+                        
+                                for (int64_t neighbour : graph[node]) {
+                                    if (neighbour == parent) {
+                                        continue;
+                                    }
+                        
+                                    if (true == visited[neighbour]) {
+                                        lowpoint[node] = std::min(
+                                            lowpoint[node],
+                                            entry_time[neighbour]
+                                        );
+                                    }
+                                    else {
+                                        dfs(neighbour, node);
+                                        lowpoint[node] = std::min(
+                                            lowpoint[node],
+                                            lowpoint[neighbour]
+                                        );
+                                        if (lowpoint[neighbour] > entry_time[node]) {
+                                            bridges.emplace_back(node, neighbour);
+                                        }
+                                    }
+                                }
+                            };
+                        
+                            for (int64_t node = 0; node < n; ++node) {
+                                if (false == visited[node]) {
+                                    dfs(node, -1);
+                                }
+                            }
+                        
+                            return bridges;
+                        }
+                        </script></code></pre>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                width: "100%",
+                height: "100%",
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+        <script src="../js/header.js"></script>
+    </body>
+</html>

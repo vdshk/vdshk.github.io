@@ -52,17 +52,16 @@
                                 </li>
                                 <ul>
                                     <li>
-                                        <code inline>d[i]</code> - the shortest distance from <code inline>source node</code> to node <code inline>i</code> if <code inline>i</code> is reachable
+                                        <code inline>distance[i]</code> - the shortest distance from <code inline>source node</code> to node <code inline>i</code> if <code inline>i</code> is reachable
                                     </li>
                                     <li>
-                                        <code inline>d[i] = $\infty$</code> otherwise
+                                        <code inline>distance[i] = $\infty$</code> otherwise
                                     </li>
                                 </ul>
                             </ul>
-                            <li>Time complexity:</li>
-                            <ul>
-                                <li>the algorithm works in $O(N^2 + M)$</li>
-                            </ul>
+                            <li>
+                                Time complexity: $O(N^2 + M)$
+                            </li>
                         </ul>
                         </p>
                     </section>
@@ -119,7 +118,7 @@
                             Let's see how the Dijkstra algorithm works with an example.
                             We use an undirected graph with 7 nodes.
                         </p>
-                            <img data-src="./static/dijkstra/dijkstra-step-0.svg"/>
+                        <img data-src="./static/dijkstra/dijkstra-step-0.svg"/>
                     </section>
                     <section>
                         <p>
@@ -227,7 +226,7 @@
                         C++
                         <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
                         std::vector<int64_t> dijkstra(
-                            const std::vector<std::vector<std::pair<int64_t, int64_t>>> graph,
+                            const std::vector<std::vector<std::pair<int64_t, int64_t>>> &graph,
                             const int64_t source_node
                         ) {
                             std::size_t n = graph.size();
@@ -287,6 +286,9 @@
             Reveal.initialize({
                 slideNumber: "c/t",
                 hash: true,
+
+                width: "100%",
+                height: "100%",
 
                 // Learn about plugins: https://revealjs.com/plugins/
                 plugins: [
