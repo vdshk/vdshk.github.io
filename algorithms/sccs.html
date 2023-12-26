@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>vadyushkins</title>
+        <link rel="icon" type="image/x-icon" href="../dist/favicon.ico">
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#/1/1">&#183;Algorithms</a><a href="./sccs.html">&#183;SCCS</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section>
+                        <h2>Strongly Connected Components Search</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
+                    </section>
+                    <section>
+                        <p>
+                        <ul>
+                            <li>
+                                Input:directed <code inline>graph</code> with <code inline>N</code> nodes and <code inline>M</code> edges
+                            </li>
+                            <li>
+                                Output: array <code inline>components</code> of <code inline>graph</code> strongly connected components
+                            </li>
+                            <li>
+                                Time complexity: $O(N + M)$
+                            </li>
+                        </ul>
+                        </p>
+                        <br>
+                        <q>
+                            A directed graph is called <b><u>strongly connected graph</u></b>
+                            if there is a path in each direction between each pair of nodes of the graph
+                        </q>
+                        <br><br>
+                        <q>
+                            A <b><u>strongly connected component</u></b> of a directed graph G is a subgraph that is strongly connected,
+                            and is maximal with this property: no additional edges or nodes from G can be included
+                            in the subgraph without breaking its property of being strongly connected.
+                        </q>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <h2>Condensation order</h2>
+                        <p>
+                            Run sequence of depth first search of the <code inline>graph</code> which will return
+                            nodes with increasing exit time, i.e. some list <code inline>condensation_order</code>.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Strongly connected components</h2>
+                        <p>
+                            Build <code inline>transposed_graph</code>.
+                            Run a series of depth first searches in the order determined by
+                            list <code inline>condensation_order</code>
+                            (to be exact in reverse order, i.e. in decreasing order of exit times)
+                            on <code inline>transposed_graph</code>.
+                            Every set of nodes, reached after the next search, will be the next strongly connected component.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Let's see how the Strongly Connected Components Search (SCCS)
+                            algorithm works with an example.
+                            We use an directed graph with 7 nodes.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-0.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS starts from <code inline>node 1</code> and set
+                            <code inline>visited[1] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-1.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 4</code> and set
+                            <code inline>visited[4] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-2.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 2</code> and set
+                            <code inline>visited[2] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-3.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS backtrack from <code inline>node 2</code> to
+                            <code inline>node 4</code> and append
+                            <code inline>node 2</code> to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-4.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS backtrack from <code inline>node 4</code> to
+                            <code inline>node 1</code> and append
+                            <code inline>node 4</code> to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-5.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Since there is no unvisited neighbours for
+                            <code inline>node 1</code>, SCCS just append it to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-6.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to next unvisited node - <code inline>node 3</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-7.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 5</code> and set
+                            <code inline>visited[5] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-8.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 6</code> and set
+                            <code inline>visited[6] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-9.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 7</code> and set
+                            <code inline>visited[7] = 1</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-10.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS backtrack from <code inline>node 7</code> to
+                            <code inline>node 6</code> and append
+                            <code inline>node 7</code> to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-11.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS backtrack from <code inline>node 6</code> to
+                            <code inline>node 5</code> and append
+                            <code inline>node 6</code> to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-12.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS backtrack from <code inline>node 5</code> to
+                            <code inline>node 3</code> and append
+                            <code inline>node 5</code> to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-13.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Since there is no unvisited neighbours for
+                            <code inline>node 3</code>, SCCS just append it to the
+                            <code inline>order</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-14.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            Now SCCS visit nodes in reversed <code inline>order</code> on
+                            <code inline>transposed graph</code>.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-15.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS starts from <code inline>node 3</code>, set
+                            <code inline>visited[3] = 1</code> and add it to
+                            current strongly connected component (CSCC).
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-16.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 7</code>, set
+                            <code inline>visited[7] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-17.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 6</code>, set
+                            <code inline>visited[6] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-18.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 5</code>, set
+                            <code inline>visited[5] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-19.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS repeatedly backtrack from <code inline>node 5</code> to
+                            <code inline>node 6</code>, then <code inline>node 7</code>
+                            and finally <code inline>node 3</code> and is done for this
+                            strongly connected component.
+                        </p>
+                        <p>
+                            Then SCCS moves to the next node in reversed <code inline>order</code> -
+                            <code inline>node 1</code>, set
+                            <code inline>visited[1] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-20.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 2</code>, set
+                            <code inline>visited[2] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-21.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS moves to <code inline>node 4</code>, set
+                            <code inline>visited[4] = 1</code> and add it to CSCC.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-22.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            SCCS repeatedly backtrack from <code inline>node 4</code> to
+                            <code inline>node 2</code>, then <code inline>node 1</code>
+                            and is done for this strongly connected component.
+                        </p>
+                        <p>
+                            Strongly Connected Components Search algorithm is finished.
+                        </p>
+                        <img data-src="./static/sccs/sccs-step-23.svg"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section id="python">
+                        Python
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        def strongly_connected_components_search(
+                            graph: Dict[int, List[int]],
+                        ) -> List[List[int]]:
+                            n = len(graph)
+                            visited = [False] * n
+
+                            condensation_order = []
+
+                            def compute_order(node: int):
+                                nonlocal visited, condensation_order
+                                visited[node] = True
+                                for neighbour in graph[node]:
+                                    if False == visited[neighbour]:
+                                        compute_order(neighbour)
+                                condensation_order.append(node)
+
+                            for i in range(n):
+                                if False == visited[i]:
+                                    compute_order(i)
+
+                            transposed_graph: Dict[int, List[int]] = {i: [] for i in range(n)}
+                            for i in range(n):
+                                for j in graph[i]:
+                                    transposed_graph[j].append(i)
+
+                            visited = [False] * n
+
+                            strongly_connected_component = []
+
+                            def compute_strongly_connected_component(node: int):
+                                nonlocal visited, transposed_graph, strongly_connected_component
+                                visited[node] = True
+                                strongly_connected_component.append(node)
+                                for neighbour in transposed_graph[node]:
+                                    if False == visited[neighbour]:
+                                        compute_strongly_connected_component(neighbour)
+
+                            result: List[List[int]] = []
+                            for i in range(n - 1, -1, -1):
+                                node = condensation_order[i]
+                                if False == visited[node]:
+                                    compute_strongly_connected_component(node)
+                                    result.append(strongly_connected_component[:])
+                                    strongly_connected_component.clear()
+
+                            return result
+
+                        </code></pre>
+                    </section>
+                    <section id="cpp">
+                        C++
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        std::vector<std::vector<int64_t>> strongly_connected_components_search(
+                            const std::vector<std::vector<int64_t>> &graph
+                        ) {
+                            std::size_t n = graph.size();
+                            std::vector<bool> visited(n, false);
+                        
+                            std::vector<int64_t> condensation_order;
+                        
+                            std::function<void(int64_t)> compute_order;
+                            compute_order = [&](int64_t node) {
+                                visited[node] = true;
+                                for (int64_t neighbour : graph[node]) {
+                                    if (false == visited[neighbour]) {
+                                        compute_order(neighbour);
+                                    }
+                                }
+                                condensation_order.push_back(node);
+                            };
+                        
+                            for (int64_t i = 0; i < n; ++i) {
+                                if (false == visited[i]) {
+                                    compute_order(i);
+                                }
+                            }
+                        
+                            std::vector<std::vector<int64_t>> transposed_graph(n);
+                            for (int64_t i = 0; i < n; ++i) {
+                                for (int64_t j : graph[i]) {
+                                    transposed_graph[j].push_back(i);
+                                }
+                            }
+                        
+                            visited.assign(n, false);
+                        
+                            std::vector<int64_t> strongly_connected_component;
+                        
+                            std::function<void(int64_t)> compute_strongly_connected_component;
+                            compute_strongly_connected_component = [&](int64_t node) {
+                                visited[node] = true;
+                                strongly_connected_component.push_back(node);
+                        
+                                for (int64_t neighbour : transposed_graph[node]) {
+                                    if (false == visited[neighbour]) {
+                                        compute_strongly_connected_component(neighbour);
+                                    }
+                                }
+                            };
+                        
+                            std::vector<std::vector<int64_t>> result;
+                            for (int64_t i = n - 1; i >= 0; --i) {
+                                int64_t node = condensation_order[i];
+                                if (false == visited[node]) {
+                                    compute_strongly_connected_component(node);
+                                    result.emplace_back(strongly_connected_component);
+                                    strongly_connected_component.clear();
+                                }
+                            }
+                        
+                            return result;
+                        }
+                        </script></code></pre>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                width: "100%",
+                height: "100%",
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+        <script src="../js/header.js"></script>
+    </body>
+</html>
