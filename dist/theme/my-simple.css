@@ -23,7 +23,7 @@ section.has-dark-background h6 {
     font-variant-ligatures: none;
     --r-background-color: #fff;
     --r-main-font: JetBrains Mono, sans-serif;
-    --r-main-font-size: 40px;
+    --r-main-font-size: 2.3em;
     --r-main-color: #000;
     --r-block-margin: 20px;
     --r-heading-margin: 0 0 20px 0;
@@ -128,7 +128,7 @@ code[inline] {
     color: #eb5757;
     font-size: 85%;
     padding: 0.1em 0.2em;
-    border-radius: 15px;
+    border-radius: 0.3em;
     line-height: normal;
     white-space: nowrap;
 }
@@ -175,7 +175,7 @@ code[inline] {
 .reveal ul {
     display: inline-block;
     text-align: left;
-    margin: 0 0 0 1em;
+    margin: 0 0 0 1.5em;
 }
 
 .reveal ol {
@@ -199,7 +199,7 @@ code[inline] {
 .reveal ol ol,
 .reveal ol ul {
     display: block;
-    margin-left: 40px;
+    margin-left: 1.5em;
 }
 
 .reveal dt {
@@ -207,7 +207,7 @@ code[inline] {
 }
 
 .reveal dd {
-    margin-left: 40px;
+    margin-left: 1.5em;
 }
 
 .reveal blockquote {
@@ -215,7 +215,7 @@ code[inline] {
     position: relative;
     width: 70%;
     margin: var(--r-block-margin) auto;
-    padding: 5px;
+    padding: 0.5em;
     font-style: italic;
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
@@ -236,7 +236,7 @@ code[inline] {
     width: 90%;
     margin: var(--r-block-margin) auto;
     text-align: left;
-    font-size: 0.55em;
+    font-size: 0.65em;
     font-family: var(--r-code-font);
     line-height: 1.2em;
     word-wrap: break-word;

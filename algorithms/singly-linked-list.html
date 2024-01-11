@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>vadyushkins</title>
+        <link rel="icon" type="image/x-icon" href="../dist/favicon.ico">
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#data-structures">&#183;Algorithms</a><a href="./singly-linked-list.html">&#183;SLL</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section>
+                        <h2>Singly Linked List</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
+                    </section>
+                    <section>
+                        <p>
+                        <table>
+                            <tr>
+                                <td>push back</td>
+                                <td>$O(1)$</td>
+                            </tr>
+                            <tr>
+                                <td>push front</td>
+                                <td>$O(1)$</td>
+                            </tr>
+                            <tr>
+                                <td>pop back</td>
+                                <td>$O(N)$</td>
+                            </tr>
+                            <tr>
+                                <td>pop front</td>
+                                <td>$O(1)$</td>
+                            </tr>
+                            <tr>
+                                <td>find</td>
+                                <td>$O(N)$</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <h2>Structure</h2>
+                        <img data-src="./static/sll/sll-structure.svg"/>
+                    </section>
+                    <section>
+                        <p>
+                            <b>Node Structure</b>: A node in a linked list
+                            typically consists of two components: data and next pointer.
+                        </p>
+                        <p>
+                            <b>Data</b>: It holds the actual value or data associated with the node.
+                        </p>
+                        <p>
+                            <b>Next Pointer</b>: It stores the memory address (reference) of the next node in the sequence.
+                        </p>
+                        <p>
+                            <b>Head and Tail</b>: The linked list is accessed through the head node,
+                            which points to the first node in the list. The last node in the list points to NULL,
+                            indicating the end of the list.
+                            This node is known as the tail node.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Push back</h2>
+                        <p>
+                            <ol>
+                                <li>Create a new node.</li>
+                                <li>Set the next pointer of tail node to the new node.</li>
+                                <li>Set the tail pointer to the new node.</li>
+                            </ol>
+                        </p>
+                        <img data-src="./static/sll/sll-push-back.svg"/>
+                    </section>
+                    <section>
+                        <h2>Push front</h2>
+                        <p>
+                            <ol>
+                                <li>Create a new node.</li>
+                                <li>Set the next pointer of the new node to the head node.</li>
+                                <li>Set the head pointer to the new node.</li>
+                            </ol>
+                        </p>
+                        <img data-src="./static/sll/sll-push-front.svg"/>
+                    </section>
+                    <section>
+                        <h2>Pop back</h2>
+                        <p>
+                            <ol>
+                                <li>Find the node with next pointer equal to the tail pointer.</li>
+                                <li>Free the tail node.</li>
+                                <li>Set the next pointer of the found node as NULL.</li>
+                                <li>Set the tail pointer to the found node.</li>
+                            </ol>
+                        </p>
+                        <img data-src="./static/sll/sll-pop-back.svg"/>
+                    </section>
+                    <section>
+                        <h2>Pop front</h2>
+                        <p>
+                            <ol>
+                                <li>Save the next pointer of the head node to the temporary pointer.</li>
+                                <li>Free the head node.</li>
+                                <li>Set the head pointer to the temporary pointer.</li>
+                            </ol>
+                        </p>
+                        <img data-src="./static/sll/sll-pop-front.svg"/>
+                    </section>
+                    <section>
+                        <h2>Find item</h2>
+                        <p>
+                            <ol>
+                                <li>Set current pointer to the head pointer.</li>
+                                <li>
+                                    Compare current node data with finding item data in cycle:
+                                    <ul>
+                                        <li>If they are equal, we found the right node.</li>
+                                        <li>If they are not equal, set current pointer to the current node next pointer.</li>
+                                    </ul>
+                                </li>
+                                <li>If current node is NULL, then there is no right node in the list.</li>
+                            </ol>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Let's look at several examples of working with a singly linked list.
+                            We start with empty list.
+                        </p>
+                        <img data-src="./static/sll/sll-example-0.svg"/>
+                    </section>
+                    <section>
+                        Push front data = <code inline>1</code>.
+                        <br>
+                        <img data-src="./static/sll/sll-example-1.svg"/>
+                    </section>
+                    <section>
+                        Push front data = <code inline>2</code>.
+                        <br>
+                        <img data-src="./static/sll/sll-example-2.svg"/>
+                    </section>
+                    <section>
+                        Push back data = <code inline>3</code>.
+                        <br>
+                        <img data-src="./static/sll/sll-example-3.svg"/>
+                    </section>
+                    <section>
+                        Pop front.
+                        <br>
+                        <img data-src="./static/sll/sll-example-4.svg"/>
+                    </section>
+                    <section>
+                        Pop back.
+                        <br>
+                        <img data-src="./static/sll/sll-example-5.svg"/>
+                    </section>
+                    <section>
+                        Find data = <code inline>4</code>.
+                        <br>
+                        <p>
+                            <ol>
+                                <li>Set current pointer to the head pointer.</li>
+                                <li>Current node data = <code inline>1</code>
+                                    is not equal to data = <code inline>4</code>.</li>
+                                <li>Set current pointer to the current node next pointer.</li>
+                            </ol>
+                        </p>
+                        <br>
+                        <img data-src="./static/sll/sll-example-6.svg"/>
+                    </section>
+                    <section>
+                        Find data = <code inline>4</code>.
+                        <br>
+                        Current node is NULL, then there is no node with data = <code inline>4</code> in the list.
+                        <br>
+                        <img data-src="./static/sll/sll-example-7.svg"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section id="python">
+                        Python
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        class SinglyLinkedList:
+                            class Node:
+                                def __init__(self, data: Any):
+                                    self.data = data
+                                    self.next: Optional[SinglyLinkedList.Node] = None
+                        
+                            def __init__(self):
+                                self.head: Optional[SinglyLinkedList.Node] = None
+                                self.tail: Optional[SinglyLinkedList.Node] = None
+                        
+                            def push_back(self, data: Any):
+                                if self.tail is None:
+                                    self.tail = SinglyLinkedList.Node(data)
+                                    self.head = self.tail
+                                else:
+                                    self.tail.next = SinglyLinkedList.Node(data)
+                                    self.tail = self.tail.next
+                        
+                            def push_front(self, data: Any):
+                                if self.head is None:
+                                    self.head = SinglyLinkedList.Node(data)
+                                    self.tail = self.head
+                                else:
+                                    new_head = SinglyLinkedList.Node(data)
+                                    new_head.next = self.head
+                                    self.head = new_head
+                        
+                            def pop_back(self):
+                                if self.tail is not None:
+                                    if self.head.next is None:
+                                        self.head = None
+                                        self.tail = None
+                                    else:
+                                        new_tail = self.head
+                                        while new_tail.next.next is not None:
+                                            new_tail = new_tail.next
+                                        new_tail.next = None
+                                        self.tail = new_tail
+                        
+                            def pop_front(self):
+                                if self.head is not None:
+                                    if self.head.next is None:
+                                        self.head = None
+                                        self.tail = None
+                                    else:
+                                        self.head = self.head.next
+                        
+                            def find_item(self, data: Any):
+                                current = self.head
+                                while current is not None:
+                                    if current.data == data:
+                                        return True
+                                    else:
+                                        current = current.next
+                                return False
+                        </code></pre>
+                    </section>
+                    <section id="cpp">
+                        C++
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        template <std::equality_comparable T>
+                            struct SinglyLinkedList {
+                                struct Node {
+                                    T data;
+                                    Node *next;
+                            
+                                    explicit Node(T data) {
+                                        this->data = data;
+                                        this->next = nullptr;
+                                    }
+                            
+                                    ~ Node() = default;
+                                };
+                            
+                                Node *head;
+                                Node *tail;
+                            
+                                explicit SinglyLinkedList() {
+                                    this->head = nullptr;
+                                    this->tail = nullptr;
+                                }
+                            
+                                void push_back(T data) {
+                                    if (this->tail == nullptr) {
+                                        this->tail = new Node(data);
+                                        this->head = tail;
+                                    } else {
+                                        this->tail->next = new Node(data);
+                                        this->tail = this->tail->next;
+                                    }
+                                }
+                            
+                                void push_front(T data) {
+                                    if (this->head == nullptr) {
+                                        this->head = new Node(data);
+                                        this->tail = this->head;
+                                    } else {
+                                        Node *new_head = new Node(data);
+                                        new_head->next = this->head;
+                                        this->head = new_head;
+                                    }
+                                }
+                            
+                                void pop_back() {
+                                    if (this->tail != nullptr) {
+                                        if (this->head->next == nullptr) {
+                                            delete this->head;
+                                            this->head = nullptr;
+                                            this->tail = nullptr;
+                                        } else {
+                                            Node *new_tail = this->head;
+                                            while (new_tail->next->next != nullptr) {
+                                                new_tail = new_tail->next;
+                                            }
+                                            if (new_tail->next != nullptr) {
+                                                delete new_tail->next;
+                                            }
+                                            new_tail->next = nullptr;
+                                            this->tail = new_tail;
+                                        }
+                                    }
+                                }
+                            
+                                void pop_front() {
+                                    if (this->head != nullptr) {
+                                        if (this->head->next == nullptr) {
+                                            delete this->head;
+                                            this->head = nullptr;
+                                            this->tail = nullptr;
+                                        } else {
+                                            Node *new_head = this->head->next;
+                                            this->head->next = nullptr;
+                                            delete this->head;
+                                            this->head = new_head;
+                                        }
+                                    }
+                                }
+                            
+                                bool find_item(T data) {
+                                    Node *current = this->head;
+                                    while (current != nullptr) {
+                                        if (current->data == data) {
+                                            return true;
+                                        } else {
+                                            current = current->next;
+                                        }
+                                    }
+                                    return false;
+                                }
+                            };
+                        </script></code></pre>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                width: "100%",
+                height: "100%",
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+        <script src="../js/header.js"></script>
+    </body>
+</html>
