@@ -21,14 +21,14 @@
     <body>
         <div id="hidden" style="display:none;">
             <div id="header">
-                <a href="../index.html">vadyushkins</a><a href="./index.html#data-structures">&#183;Algorithms</a><a href="./singly-linked-list.html">&#183;SLL</a>
+                <a href="../index.html">vadyushkins</a><a href="./index.html#data-structures">&#183;Algorithms</a><a href="./doubly-linked-list.html">&#183;DLL</a>
             </div>
         </div>
         <div class="reveal">
             <div class="slides">
                 <section>
                     <section>
-                        <h2>Singly Linked List</h2>
+                        <h2>Doubly Linked List</h2>
                         <a href="#/python">Python</a>
                         <a href="#/cpp">C++</a>
                     </section>
@@ -45,7 +45,7 @@
                             </tr>
                             <tr>
                                 <td>pop back</td>
-                                <td>$O(N)$</td>
+                                <td>$O(1)$</td>
                             </tr>
                             <tr>
                                 <td>pop front</td>
@@ -66,12 +66,12 @@
                     </section>
                     <section>
                         <h2>Structure</h2>
-                        <img data-src="./static/sll/sll-structure.svg"/>
+                        <img data-src="./static/dll/dll-structure.svg"/>
                     </section>
                     <section>
                         <p>
-                            <b>Node Structure</b>: A node in a singly linked list
-                            typically consists of two components: data and next pointer.
+                            <b>Node Structure</b>: A node in a doubly linked list
+                            typically consists of three components: data, next pointer and previous pointer.
                         </p>
                         <p>
                             <b>Data</b>: It holds the actual value or data associated with the node.
@@ -80,9 +80,12 @@
                             <b>Next Pointer</b>: It stores the memory address (reference) of the next node in the list.
                         </p>
                         <p>
+                            <b>Previous Pointer</b>: It stores the memory address (reference) of the previous node in the list.
+                        </p>
+                        <p>
                             <b>Head and Tail</b>: The linked list is accessed through the head node,
-                            which points to the first node in the list. The last node in the list points to NULL,
-                            indicating the end of the list.
+                            which points to the first node in the list.
+                            The last node in the list points to NULL, indicating the end of the list.
                             This node is known as the tail node.
                         </p>
                     </section>
@@ -92,10 +95,11 @@
                             <ol>
                                 <li>Create a new node.</li>
                                 <li>Set the next pointer of tail node to the new node.</li>
+                                <li>Set the previous pointer of new node to the tail node.</li>
                                 <li>Set the tail pointer to the new node.</li>
                             </ol>
                         </p>
-                        <img data-src="./static/sll/sll-push-back.svg"/>
+                        <img data-src="./static/dll/dll-push-back.svg"/>
                     </section>
                     <section>
                         <h2>Push front</h2>
@@ -103,33 +107,35 @@
                             <ol>
                                 <li>Create a new node.</li>
                                 <li>Set the next pointer of the new node to the head node.</li>
+                                <li>Set the previous pointer of the head node to the new node.</li>
                                 <li>Set the head pointer to the new node.</li>
                             </ol>
                         </p>
-                        <img data-src="./static/sll/sll-push-front.svg"/>
+                        <img data-src="./static/dll/dll-push-front.svg"/>
                     </section>
                     <section>
                         <h2>Pop back</h2>
                         <p>
                             <ol>
-                                <li>Find the node with next pointer equal to the tail pointer.</li>
+                                <li>Save the previous pointer of the tail node to the temporary pointer.</li>
+                                <li>Set the next pointer of tail's previous node to NULL.</li>
                                 <li>Free the tail node.</li>
-                                <li>Set the next pointer of the found node as NULL.</li>
-                                <li>Set the tail pointer to the found node.</li>
+                                <li>Set the tail pointer to the temporary pointer.</li>
                             </ol>
                         </p>
-                        <img data-src="./static/sll/sll-pop-back.svg"/>
+                        <img data-src="./static/dll/dll-pop-back.svg"/>
                     </section>
                     <section>
                         <h2>Pop front</h2>
                         <p>
                             <ol>
                                 <li>Save the next pointer of the head node to the temporary pointer.</li>
+                                <li>Set the previous pointer of head's next node to NULL.</li>
                                 <li>Free the head node.</li>
                                 <li>Set the head pointer to the temporary pointer.</li>
                             </ol>
                         </p>
-                        <img data-src="./static/sll/sll-pop-front.svg"/>
+                        <img data-src="./static/dll/dll-pop-front.svg"/>
                     </section>
                     <section>
                         <h2>Find item</h2>
@@ -155,35 +161,35 @@
                     </section>
                     <section>
                         <p>
-                            Let's look at several examples of working with a singly linked list.
+                            Let's look at several examples of working with a doubly linked list.
                             We start with empty list.
                         </p>
-                        <img data-src="./static/sll/sll-example-0.svg"/>
+                        <img data-src="./static/dll/dll-example-0.svg"/>
                     </section>
                     <section>
                         Push front data = <code inline>1</code>.
                         <br>
-                        <img data-src="./static/sll/sll-example-1.svg"/>
+                        <img data-src="./static/dll/dll-example-1.svg"/>
                     </section>
                     <section>
                         Push front data = <code inline>2</code>.
                         <br>
-                        <img data-src="./static/sll/sll-example-2.svg"/>
+                        <img data-src="./static/dll/dll-example-2.svg"/>
                     </section>
                     <section>
                         Push back data = <code inline>3</code>.
                         <br>
-                        <img data-src="./static/sll/sll-example-3.svg"/>
+                        <img data-src="./static/dll/dll-example-3.svg"/>
                     </section>
                     <section>
                         Pop front.
                         <br>
-                        <img data-src="./static/sll/sll-example-4.svg"/>
+                        <img data-src="./static/dll/dll-example-4.svg"/>
                     </section>
                     <section>
                         Pop back.
                         <br>
-                        <img data-src="./static/sll/sll-example-5.svg"/>
+                        <img data-src="./static/dll/dll-example-5.svg"/>
                     </section>
                     <section>
                         Find data = <code inline>4</code>.
@@ -197,14 +203,14 @@
                             </ol>
                         </p>
                         <br>
-                        <img data-src="./static/sll/sll-example-6.svg"/>
+                        <img data-src="./static/dll/dll-example-6.svg"/>
                     </section>
                     <section>
                         Find data = <code inline>4</code>.
                         <br>
                         Current node is NULL, then there is no node with data = <code inline>4</code> in the list.
                         <br>
-                        <img data-src="./static/sll/sll-example-7.svg"/>
+                        <img data-src="./static/dll/dll-example-7.svg"/>
                     </section>
                 </section>
 
@@ -213,32 +219,34 @@
                     <section id="python">
                         Python
                         <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
-                        class SinglyLinkedList:
+                        class DoublyLinkedList:
                             class Node:
                                 def __init__(self, data: Any):
                                     self.data = data
-                                    self.next: Optional[SinglyLinkedList.Node] = None
+                                    self.prev: Optional[DoublyLinkedList.Node] = None
+                                    self.next: Optional[DoublyLinkedList.Node] = None
                         
                             def __init__(self):
-                                self.head: Optional[SinglyLinkedList.Node] = None
-                                self.tail: Optional[SinglyLinkedList.Node] = None
+                                self.head: Optional[DoublyLinkedList.Node] = None
+                                self.tail: Optional[DoublyLinkedList.Node] = None
                         
                             def push_back(self, data: Any):
                                 if self.tail is None:
-                                    self.tail = SinglyLinkedList.Node(data)
+                                    self.tail = DoublyLinkedList.Node(data)
                                     self.head = self.tail
                                 else:
-                                    self.tail.next = SinglyLinkedList.Node(data)
+                                    self.tail.next = DoublyLinkedList.Node(data)
+                                    self.tail.next.prev = self.tail
                                     self.tail = self.tail.next
                         
                             def push_front(self, data: Any):
                                 if self.head is None:
-                                    self.head = SinglyLinkedList.Node(data)
+                                    self.head = DoublyLinkedList.Node(data)
                                     self.tail = self.head
                                 else:
-                                    new_head = SinglyLinkedList.Node(data)
-                                    new_head.next = self.head
-                                    self.head = new_head
+                                    self.head.prev = DoublyLinkedList.Node(data)
+                                    self.head.prev.next = self.head
+                                    self.head = self.head.prev
                         
                             def pop_back(self):
                                 if self.tail is not None:
@@ -246,11 +254,8 @@
                                         self.head = None
                                         self.tail = None
                                     else:
-                                        new_tail = self.head
-                                        while new_tail.next.next is not None:
-                                            new_tail = new_tail.next
-                                        new_tail.next = None
-                                        self.tail = new_tail
+                                        self.tail = self.tail.prev
+                                        self.tail.next = None
                         
                             def pop_front(self):
                                 if self.head is not None:
@@ -259,6 +264,7 @@
                                         self.tail = None
                                     else:
                                         self.head = self.head.next
+                                        self.head.prev = None
                         
                             def find_item(self, data: Any) -> bool:
                                 current = self.head
@@ -273,96 +279,96 @@
                     <section id="cpp">
                         C++
                         <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
-                        template <std::equality_comparable T>
-                        struct SinglyLinkedList {
-                            struct Node {
-                                T data;
-                                Node *next;
-                        
-                                explicit Node(T data) {
-                                    this->data = data;
-                                    this->next = nullptr;
+                            template <std::equality_comparable T>
+                            struct DoublyLinkedList {
+                                struct Node {
+                                    T data;
+                                    Node *prev;
+                                    Node *next;
+                            
+                                    explicit Node(T data) {
+                                        this->data = data;
+                                        this->prev = nullptr;
+                                        this->next = nullptr;
+                                    }
+                            
+                                    ~ Node() = default;
+                                };
+                            
+                                Node *head;
+                                Node *tail;
+                            
+                                explicit DoublyLinkedList() {
+                                    this->head = nullptr;
+                                    this->tail = nullptr;
                                 }
-                        
-                                ~ Node() = default;
+                            
+                                void push_back(T data) {
+                                    if (this->tail == nullptr) {
+                                        this->tail = new Node(data);
+                                        this->head = tail;
+                                    } else {
+                                        this->tail->next = new Node(data);
+                                        this->tail->next->prev = this->tail;
+                                        this->tail = this->tail->next;
+                                    }
+                                }
+                            
+                                void push_front(T data) {
+                                    if (this->head == nullptr) {
+                                        this->head = new Node(data);
+                                        this->tail = this->head;
+                                    } else {
+                                        this->head->prev = new Node(data);
+                                        this->head->prev->next = this->head;
+                                        this->head = this->head->prev;
+                                    }
+                                }
+                            
+                                void pop_back() {
+                                    if (this->tail != nullptr) {
+                                        if (this->head->next == nullptr) {
+                                            delete this->head;
+                                            this->head = nullptr;
+                                            this->tail = nullptr;
+                                        } else {
+                                            Node *new_tail = this->tail->prev;
+                                            this->tail->prev->next = nullptr;
+                                            this->tail->prev = nullptr;
+                                            delete this->tail;
+                                            this->tail = new_tail;
+                                        }
+                                    }
+                                }
+                            
+                                void pop_front() {
+                                    if (this->head != nullptr) {
+                                        if (this->head->next == nullptr) {
+                                            delete this->head;
+                                            this->head = nullptr;
+                                            this->tail = nullptr;
+                                        } else {
+                                            Node *new_head = this->head->next;
+                                            this->head->next->prev = nullptr;
+                                            this->head->next = nullptr;
+                                            delete this->head;
+                                            this->head = new_head;
+                                        }
+                                    }
+                                }
+                            
+                                bool find_item(T data) {
+                                    Node *current = this->head;
+                                    while (current != nullptr) {
+                                        if (current->data == data) {
+                                            return true;
+                                        } else {
+                                            current = current->next;
+                                        }
+                                    }
+                                    return false;
+                                }
                             };
-                        
-                            Node *head;
-                            Node *tail;
-                        
-                            explicit SinglyLinkedList() {
-                                this->head = nullptr;
-                                this->tail = nullptr;
-                            }
-                        
-                            void push_back(T data) {
-                                if (this->tail == nullptr) {
-                                    this->tail = new Node(data);
-                                    this->head = tail;
-                                } else {
-                                    this->tail->next = new Node(data);
-                                    this->tail = this->tail->next;
-                                }
-                            }
-                        
-                            void push_front(T data) {
-                                if (this->head == nullptr) {
-                                    this->head = new Node(data);
-                                    this->tail = this->head;
-                                } else {
-                                    Node *new_head = new Node(data);
-                                    new_head->next = this->head;
-                                    this->head = new_head;
-                                }
-                            }
-                        
-                            void pop_back() {
-                                if (this->tail != nullptr) {
-                                    if (this->head->next == nullptr) {
-                                        delete this->head;
-                                        this->head = nullptr;
-                                        this->tail = nullptr;
-                                    } else {
-                                        Node *new_tail = this->head;
-                                        while (new_tail->next->next != nullptr) {
-                                            new_tail = new_tail->next;
-                                        }
-                                        if (new_tail->next != nullptr) {
-                                            delete new_tail->next;
-                                        }
-                                        new_tail->next = nullptr;
-                                        this->tail = new_tail;
-                                    }
-                                }
-                            }
-                        
-                            void pop_front() {
-                                if (this->head != nullptr) {
-                                    if (this->head->next == nullptr) {
-                                        delete this->head;
-                                        this->head = nullptr;
-                                        this->tail = nullptr;
-                                    } else {
-                                        Node *new_head = this->head->next;
-                                        this->head->next = nullptr;
-                                        delete this->head;
-                                        this->head = new_head;
-                                    }
-                                }
-                            }
-                        
-                            bool find_item(T data) {
-                                Node *current = this->head;
-                                while (current != nullptr) {
-                                    if (current->data == data) {
-                                        return true;
-                                    } else {
-                                        current = current->next;
-                                    }
-                                }
-                                return false;
-                            }
-                        };
                         </script></code></pre>
                     </section>
                 </section>
