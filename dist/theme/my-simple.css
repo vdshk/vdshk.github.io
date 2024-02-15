@@ -372,7 +372,7 @@ code[inline] {
 .reveal .progress {
     background: rgba(0, 0, 0, 0.2);
     color: var(--r-link-color);
-    height: 1%;
+    height: 0.25em;
 }
 
 /*********************************************

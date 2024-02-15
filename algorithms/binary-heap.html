@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <title>vadyushkins</title>
+        <link rel="icon" type="image/x-icon" href="../dist/favicon.ico">
+
+        <link rel="stylesheet" href="../dist/reset.css" />
+        <link rel="stylesheet" href="../dist/reveal.css" />
+        <link rel="stylesheet" href="../dist/theme/my-simple.css" />
+
+        <!-- Theme used for syntax highlighted code -->
+        <!-- All themes https://github.com/highlightjs/highlight.js/tree/main/src/styles -->
+        <link rel="stylesheet" href="../plugin/highlight/atom-one-light.css" />
+    </head>
+    <body>
+        <div id="hidden" style="display:none;">
+            <div id="header">
+                <a href="../index.html">vadyushkins</a><a href="./index.html#data-structures">&#183;Algorithms</a><a href="./Heap.html">&#183;Binary Heap</a>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section>
+                        <h2>Binary Heap</h2>
+                        <a href="#/python">Python</a>
+                        <a href="#/cpp">C++</a>
+                    </section>
+                    <section>
+                        <p>
+                        <table>
+                            <tr>
+                                <td>push</td>
+                                <td>$O(\operatorname{log}(N))$</td>
+                            </tr>
+                            <tr>
+                                <td>pop</td>
+                                <td>$O(\operatorname{log}(N))$</td>
+                            </tr>
+                            <tr>
+                                <td>remove</td>
+                                <td>$O(\operatorname{log}(N))$</td>
+                            </tr>
+                            <tr>
+                                <td>change</td>
+                                <td>$O(\operatorname{log}(N))$</td>
+                            </tr>
+                            <tr>
+                                <td>top</td>
+                                <td>$O(1)$</td>
+                            </tr>
+                            <tr>
+                                <td>size</td>
+                                <td>$O(1)$</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Description</h2>
+                    </section>
+                    <section>
+                        <p>
+                            A <b>binary heap</b> is defined as a binary tree with two additional constraints:
+                            <ul>
+                                <li>
+                                    <b>Shape property</b>: a binary heap is a complete binary tree;
+                                    that is, all levels of the tree, except possibly the last one (deepest)
+                                    are fully filled, and, if the last level of the tree is not complete,
+                                    the nodes of that level are filled from left to right.
+                                </li>
+                                <li>
+                                    <b>Heap property</b>: the key stored in each node is either greater than or equal to ($\geq$)
+                                    or less than or equal to ($\leq$) the keys in the node's children, according to some total order.
+                                </li>
+                            </ul>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Structure</h2>
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-structure.svg"/>
+                    </section>
+                    <section>
+                        <h2>Push (sift-up)</h2>
+                        <p>
+                            To push an element to a heap, we can perform this algorithm:
+                            <ol>
+                                <li>
+                                    Push the element to the bottom level of the heap at the leftmost open space.
+                                </li>
+                                <li>
+                                    Compare the pushed element with its parent; if they are in the correct order, stop.
+                                </li>
+                                <li>
+                                    If not, swap the element with its parent and return to the previous step.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>
+                            Steps 2 and 3, which restore the heap property by comparing and possibly swapping a node with its parent,
+                            are called the <b>sift-up</b> operation.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Pop (sift-down)</h2>
+                        <p>
+                            The procedure for popping the root from the heap while retaining the heap property is as follows:
+
+                            <ol>
+                                <li>
+                                    Replace the root of the heap with the last element on the last level.
+                                </li>
+                                <li>
+                                    Remove the last element on the last level.
+                                </li>
+                                <li>
+                                    Compare the new root with its children; if they are in the correct order, stop.
+                                </li>
+                                <li>
+                                    If not, swap the element with one of its children and return to the previous step.
+                                </li>
+                            </ol>
+                        </p>
+                        <p>
+                            Steps 3 and 4, which restore the heap property by comparing and possibly swapping a node with one of its children, are called the <b>sift-down</b> operation.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Delete</h2>
+                        <p>
+                            Deleting an arbitrary element can be done as follows:
+
+                            <ol>
+                                <li>
+                                    Swap the element we want to delete with the last element.
+                                </li>
+                                <li>
+                                    Sift-down or sift-up to restore the heap property.
+                                </li>
+                            </ol>
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Change</h2>
+                        <p>
+                            <ol>
+                                <li>
+                                    Change value by the given index.
+                                </li>
+                                <li>
+                                    If parent heap property is violated do sift-up.
+                                </li>
+                                <li>
+                                    Else if changed node heap property is violated do sift-down.
+                                </li>
+                            </ol>
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                        <table>
+                            <tr>
+                                <td>top:</td>
+                                <td>return root node value property</td>
+                            </tr>
+                            <tr>
+                                <td>size:</td>
+                                <td>return heap size property</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                    </section>
+                    <section>
+                        <p>
+                            Let's look at several examples of working with a max binary heap.
+                            We start with empty heap.
+                        </p>
+                        <img data-src="./static/binary-heap/binary-heap-example-0.svg"/>
+                    </section>
+                    <section>
+                        Insert data = <code inline>10</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-1.svg"/>
+                    </section>
+                    <section>
+                        Insert data = <code inline>20</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-2.svg"/>
+                    </section>
+                    <section>
+                        Sift-up <code inline>20</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-3.svg"/>
+                    </section>
+                    <section>
+                        Insert data = <code inline>30</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-4.svg"/>
+                    </section>
+                    <section>
+                        Sift-up <code inline>30</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-5.svg"/>
+                    </section>
+                    <section>
+                        Insert data = <code inline>40</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-6.svg"/>
+                    </section>
+                    <section>
+                        Sift-up <code inline>40</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-7.svg"/>
+                    </section>
+                    <section>
+                        Sift-up <code inline>40</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-8.svg"/>
+                    </section>
+                    <section>
+                        Pop <code inline>40</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-9.svg"/>
+                    </section>
+                    <section>
+                        Pop <code inline>40</code>.
+                        <br>
+                        Swap <code inline>40</code> with <code inline>10</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-10.svg"/>
+                    </section>
+                    <section>
+                        Pop <code inline>40</code>.
+                        <br>
+                        Remove <code inline>40</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-11.svg"/>
+                    </section>
+                    <section>
+                        Pop <code inline>40</code>.
+                        <br>
+                        Sift-down <code inline>10</code>.
+                        <br>
+                        <img data-src="./static/binary-heap/binary-heap-example-12.svg"/>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Code</h2></section>
+                    <section id="python">
+                        Python
+                        <pre><code class="hljs python" data-noescape data-trim data-line-numbers>
+                        class BinaryHeap:
+                            def __init__(self, container: Any = list, compare: Any = operator.ge) -> None:
+                                self.container = container()
+                                self.compare = compare
+                        
+                            def sift_up(self, key: int):
+                                if len(self.container) > key:
+                                    while (
+                                        key > 0
+                                        and self.compare(self.container[(key - 1) >> 1], self.container[key])
+                                        == False
+                                    ):
+                                        (self.container[(key - 1) >> 1], self.container[key]) = (
+                                            self.container[key],
+                                            self.container[(key - 1) >> 1],
+                                        )
+                                        key >>= 1
+                        
+                            def sift_down(self, key: int):
+                                if len(self.container) > key:
+                                    while (
+                                        2 * key + 1 < len(self.container)
+                                        and self.compare(self.container[key], self.container[2 * key + 1])
+                                        == False
+                                    ) or (
+                                        2 * key + 2 < len(self.container)
+                                        and self.compare(self.container[key], self.container[2 * key + 2])
+                                        == False
+                                    ):
+                                        if 2 * key + 2 < len(self.container):
+                                            if (
+                                                self.compare(
+                                                    self.container[2 * key + 1], self.container[2 * key + 2]
+                                                )
+                                                == True
+                                            ):
+                                                (self.container[2 * key + 1], self.container[key]) = (
+                                                    self.container[key],
+                                                    self.container[2 * key + 1],
+                                                )
+                                                key = 2 * key + 1
+                                            else:
+                                                (self.container[2 * key + 2], self.container[key]) = (
+                                                    self.container[key],
+                                                    self.container[2 * key + 2],
+                                                )
+                                                key = 2 * key + 2
+                                        else:
+                                            (self.container[2 * key + 1], self.container[key]) = (
+                                                self.container[key],
+                                                self.container[2 * key + 1],
+                                            )
+                                            key = 2 * key + 1
+                        
+                            def push(self, new_value: Any):
+                                self.container.append(new_value)
+                                self.sift_up(len(self.container) - 1)
+                        
+                            def remove(self, key: int):
+                                if len(self.container) > key:
+                                    (self.container[len(self.container) - 1], self.container[key]) = (
+                                        self.container[key],
+                                        self.container[len(self.container) - 1],
+                                    )
+                                    self.container.pop()
+                                    self.sift_down(key)
+                        
+                            def pop(self):
+                                self.remove(0)
+                        
+                            def change(self, key: int, new_value: Any):
+                                if len(self.container) > key and self.container[key] != new_value:
+                                    self.container[key] = new_value
+                                    if (
+                                        key > 0
+                                        and self.compare(self.container[(key - 1) >> 1], self.container[key])
+                                        == False
+                                    ):
+                                        self.sift_up(key)
+                                    else:
+                                        self.sift_down(key)
+                        
+                            def top(self) -> Any:
+                                return self.container[0] if len(self.container) > 0 else None
+                        
+                            def size(self) -> int:
+                                return len(self.container)
+                        </code></pre>
+                    </section>
+                    <section id="cpp">
+                        C++
+                        <pre><code class="hljs cpp" data-noescape data-trim data-line-numbers><script type="text/template">
+                        template <
+                            std::equality_comparable T,
+                            typename Container = std::vector<T>,
+                            typename Compare = std::greater<typename Container::value_type>
+                        >
+                        struct BinaryHeap {
+                            Container *container;
+                            Compare *compare;
+                        
+                            explicit BinaryHeap() {
+                                this->container = new Container();
+                                this->compare = new Compare();
+                            }
+                        
+                            ~ BinaryHeap() = default;
+                        
+                            void sift_up(std::size_t key) {
+                                if (this->container->size() > key) {
+                                    while (
+                                        key > 0 &&
+                                        (*this->compare)(
+                                            this->container->begin()[(key - 1) >> 1],
+                                            this->container->begin()[key]
+                                        ) == false
+                                    ) {
+                                        std::swap(
+                                            this->container->begin()[(key - 1) >> 1],
+                                            this->container->begin()[key]
+                                        );
+                                        key >>= 1;
+                                    }
+                                }
+                            }
+                        
+                            void sift_down(std::size_t key) {
+                                if (this->container->size() > key) {
+                                    while (
+                                        (
+                                            2 * key + 1 < this->container->size() &&
+                                            (*this->compare)(
+                                                this->container->begin()[key],
+                                                this->container->begin()[2 * key + 1]
+                                            ) == false
+                                        ) ||
+                                        (
+                                            2 * key + 2 < this->container->size() &&
+                                            (*this->compare)(
+                                                this->container->begin()[key],
+                                                this->container->begin()[2 * key + 2]
+                                            ) == false
+                                        )
+                                    ) {
+                                        if (2 * key + 2 < this->container->size()) {
+                                            if (
+                                                (*this->compare)(
+                                                    this->container->begin()[2 * key + 1],
+                                                    this->container->begin()[2 * key + 2]
+                                                ) == true
+                                            ) {
+                                                std::swap(
+                                                    this->container->begin()[key],
+                                                    this->container->begin()[2 * key + 1]
+                                                );
+                                                key = 2 * key + 1;
+                                            } else {
+                                                std::swap(
+                                                    this->container->begin()[key],
+                                                    this->container->begin()[2 * key + 2]
+                                                );
+                                                key = 2 * key + 2;
+                                            }
+                                        } else {
+                                            std::swap(
+                                                this->container->begin()[key],
+                                                this->container->begin()[2 * key + 1]
+                                            );
+                                            key = 2 * key + 1;
+                                        }
+                                    }
+                                }
+                            }
+                        
+                            void push(T new_value) {
+                                this->container->push_back(new_value);
+                                this->sift_up(this->container->size() - 1);
+                            }
+                        
+                            void remove(size_t key) {
+                                if (this->container->size() > key) {
+                                    std::swap(
+                                        this->container->begin()[key],
+                                        this->container->begin()[this->container->size() - 1]
+                                    );
+                                    this->container->pop_back();
+                                    this->sift_down(key);
+                                }
+                            }
+                        
+                            void pop() {
+                                this->del(0);
+                            }
+                        
+                            void change(size_t key, T new_value) {
+                                if (this->container->size() > key && this->container->begin()[key] != new_value) {
+                                    this->container->begin()[key] = new_value;
+                                    if (
+                                        key > 0 &&
+                                        (*this->compare)(
+                                            this->container->begin()[(key - 1) >> 1],
+                                            this->container->begin()[key]
+                                        ) == false
+                                    ) {
+                                        this->sift_up(key);
+                                    } else {
+                                        this->sift_down(key);
+                                    }
+                                }
+                            }
+                        
+                            T top() {
+                                return this->container->begin()[0];
+                            }
+                        
+                            size_t size() {
+                                return this->container->size();
+                            }
+                        };
+                        </script></code></pre>
+                    </section>
+                </section>
+            </div>
+        </div>
+
+        <script src="../dist/reveal.js"></script>
+        <script src="../plugin/notes/notes.js"></script>
+        <script src="../plugin/markdown/markdown.js"></script>
+        <script src="../plugin/highlight/highlight.js"></script>
+        <script src="../plugin/math/math.js"></script>
+        <script src="../js/reveal.js-copycode/plugin/copycode/copycode.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                slideNumber: "c/t",
+                hash: true,
+
+                width: "100%",
+                height: "100%",
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealNotes,
+                    RevealMath.KaTeX,
+                    CopyCode,
+                ],
+
+                // More info about CopyCode plugin
+                // - https://github.com/Martinomagnifico/reveal.js-copycode
+                copycode: {
+                    style: {
+                        copybg: "#4078f2",
+                        copiedbg: "#4078f2",
+                        copycolor: "#000",
+                        copiedcolor: "#000",
+                    },
+                },
+            });
+        </script>
+        <script src="../js/header.js"></script>
+    </body>
+</html>
